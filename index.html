@@ -5,53 +5,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🌈 Cosmic Pastel Universe</title>
+<title>🌌 El universo que te esperaba</title>
 
 <style>
 
 /* =========================
-   FONDO PASTEL ANIMADO
+   UNIVERSO SUAVE VIVO
 ========================= */
 
 body{
 margin:0;
-font-family:'Segoe UI', sans-serif;
 overflow:hidden;
-color:#fff;
-background: linear-gradient(-45deg,
-#ffb6ff,
-#7afcff,
-#ffd6a5,
-#caffbf,
-#bdb2ff
-);
-background-size:400% 400%;
-animation:gradient 12s ease infinite;
+font-family:'Segoe UI', sans-serif;
+color:white;
+background: radial-gradient(circle at top,#0b1020,#050816,#02030a);
 }
 
-@keyframes gradient{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-/* =========================
-   PARTÍCULAS SUAVES
-========================= */
-
-.particle{
+/* canvas universo */
+canvas{
 position:fixed;
-width:6px;
-height:6px;
-border-radius:50%;
-background:white;
-opacity:.5;
-animation:float 6s infinite ease-in-out;
-}
-
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-20px);}
+top:0;
+left:0;
+z-index:0;
 }
 
 /* =========================
@@ -67,84 +42,59 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:20px;
-backdrop-filter:blur(2px);
+z-index:10;
 }
 
 h1{
 font-size:3rem;
-text-shadow:0 0 20px rgba(255,255,255,.4);
+font-weight:500;
+text-shadow:0 0 20px rgba(255,255,255,0.2);
 }
 
 p{
 max-width:600px;
-opacity:.85;
+opacity:.75;
+line-height:1.6;
 }
 
 /* =========================
-   BOTONES MULTICOLOR
+   BOTONES SUAVES
 ========================= */
 
 button{
-margin:8px;
-padding:12px 18px;
-border:none;
+margin-top:15px;
+padding:12px 20px;
 border-radius:14px;
-cursor:pointer;
-font-size:14px;
+border:1px solid rgba(255,255,255,0.15);
+background:rgba(255,255,255,0.05);
 color:white;
+cursor:pointer;
+backdrop-filter:blur(10px);
 transition:.3s;
-box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
 button:hover{
-transform:scale(1.05);
+transform:translateY(-3px);
+background:rgba(255,255,255,0.1);
 }
 
-/* colores botones */
-
-.pink{background:#ff7eb9;}
-.blue{background:#7afcff;}
-.purple{background:#b388ff;}
-.green{background:#caffbf;}
-.yellow{background:#ffd6a5;}
-.red{background:#ff6b6b;}
-
 /* =========================
-   PANEL
+   PANEL DE TEXTO
 ========================= */
 
-#panel{
+.panel{
 position:fixed;
 bottom:20px;
 left:50%;
 transform:translateX(-50%);
-padding:12px 20px;
-border-radius:15px;
-background:rgba(255,255,255,.25);
-backdrop-filter:blur(10px);
-color:#000;
+padding:12px 18px;
+border-radius:14px;
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.1);
 display:none;
-}
-
-/* =========================
-   GRID BOTONES
-========================= */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-gap:10px;
-margin-top:20px;
-width:90%;
-max-width:800px;
-}
-
-.card{
-background:rgba(255,255,255,.25);
-padding:20px;
-border-radius:18px;
-backdrop-filter:blur(10px);
-color:#000;
+max-width:80%;
+text-align:center;
 }
 
 </style>
@@ -153,163 +103,229 @@ color:#000;
 
 <body>
 
-<div class="ui">
+<canvas id="space"></canvas>
 
-<h1>🌈 Cosmic Pastel Universe</h1>
+<div class="ui" id="ui">
 
-<p>Un universo interactivo lleno de colores, secretos y sorpresas ✨</p>
+<h1>🌌 Conectando universo...</h1>
 
-<!-- BOTONES PRINCIPALES -->
-<div>
+<p id="text">
+No sé quién eres todavía…<br>
+pero siento que ya te estaba esperando.
+</p>
 
-<button class="pink" onclick="msg()">💌 Mensaje</button>
-<button class="blue" onclick="question()">🌠 Pregunta</button>
-<button class="purple" onclick="oracle()">🔮 Oráculo</button>
-
-</div>
-
-<!-- GRID INTERACTIVO -->
-<div class="grid">
-
-<div class="card">
-<h3>⭐ Estrellas</h3>
-<button class="yellow" onclick="star()">Aumentar</button>
-</div>
-
-<div class="card">
-<h3>🌷 Jardín</h3>
-<button class="green" onclick="flower()">Plantar</button>
-</div>
-
-<div class="card">
-<h3>🐱 Mascota</h3>
-<button class="pink" onclick="pet()">Interactuar</button>
-</div>
-
-<div class="card">
-<h3>🎁 Cofre</h3>
-<button class="red" onclick="chest()">Abrir</button>
-</div>
-
-<div class="card">
-<h3>🎡 Ruleta</h3>
-<button class="blue" onclick="roulette()">Girar</button>
-</div>
-
-<div class="card">
-<h3>📖 Diario</h3>
-<button class="purple" onclick="diary()">Guardar</button>
-</div>
+<button onclick="start()">✨ Continuar</button>
 
 </div>
 
-</div>
-
-<!-- PANEL -->
-<div id="panel"></div>
+<div class="panel" id="panel"></div>
 
 <script>
 
 /* =========================
-   DATOS
+   UNIVERSO VIVO (CANVAS)
 ========================= */
 
-const messages=[
-"✨ Eres más importante de lo que crees",
-"🌈 Todo fluye como debe ser",
-"💜 Hoy es un buen día para ti"
-];
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
 
-const questions=[
-"¿Qué te haría feliz ahora?",
-"¿Qué sueñas lograr?",
-"¿Qué te inspira?"
-];
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-const oracle=[
-"🔮 Algo bonito viene",
-"🌙 Confía en el proceso",
-"⭐ Estás creciendo"
-];
+let stars = [];
 
-const pets=[
-"😺 La mascota sonríe",
-"🐱 Quiere jugar contigo",
-"💜 Te aprecia mucho"
-];
+for(let i=0;i<120;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+dx:(Math.random()-0.5)*0.3,
+dy:(Math.random()-0.5)*0.3
+});
+}
 
-const chest=[
-"🎁 Energía positiva",
-"⭐ Estrella brillante",
-"🌷 Suerte suave"
-];
+function draw(){
 
-const roulette=[
-"🌙 Descansar",
-"🌈 Crear algo",
-"💜 Sonreír",
-"⭐ Soñar"
+ctx.fillStyle="rgba(5,8,20,0.4)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="white";
+
+stars.forEach(s=>{
+
+s.x+=s.dx;
+s.y+=s.dy;
+
+if(s.x<0||s.x>canvas.width) s.dx*=-1;
+if(s.y<0||s.y>canvas.height) s.dy*=-1;
+
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
+
+});
+
+requestAnimationFrame(draw);
+}
+
+draw();
+
+/* =========================
+   HISTORIA EMOCIONAL
+========================= */
+
+let step = 0;
+
+const story = [
+"Estoy intentando entenderte…",
+"Pero hay algo en ti que ya reconozco.",
+"No es coincidencia que estés aquí.",
+"El universo guarda cosas que no se dicen en voz alta.",
+"Y tú… eres una de ellas."
 ];
 
 /* =========================
-   FUNCIONES
+   INICIO
 ========================= */
 
-function show(text){
-let p=document.getElementById("panel");
-p.style.display="block";
-p.innerText=text;
-setTimeout(()=>p.style.display="none",2500);
-}
+function start(){
 
-function msg(){
-show(messages[Math.floor(Math.random()*messages.length)]);
-}
+document.getElementById("ui").innerHTML = `
+<h1>🌙 Sincronización completa</h1>
 
-function question(){
-show(questions[Math.floor(Math.random()*questions.length)]);
-}
+<p>
+Ahora el universo puede reaccionar a ti.
+</p>
 
-function oracle(){
-show(oracle[Math.floor(Math.random()*oracle.length)]);
-}
+<button onclick="next()">Entrar</button>
+`;
 
-function pet(){
-show(pets[Math.floor(Math.random()*pets.length)]);
-}
-
-function chest(){
-show(chest[Math.floor(Math.random()*chest.length)]);
-}
-
-function roulette(){
-show(roulette[Math.floor(Math.random()*roulette.length)]);
-}
-
-function star(){
-show("⭐ Estrella añadida al universo");
-}
-
-function flower(){
-show("🌷 Flor plantada");
-}
-
-function diary(){
-show("📖 Guardado en el universo");
 }
 
 /* =========================
-   PARTÍCULAS
+   PROGRESIÓN
 ========================= */
 
-for(let i=0;i<60;i++){
-let d=document.createElement("div");
-d.className="particle";
-d.style.left=Math.random()*100+"%";
-d.style.top=Math.random()*100+"%";
-d.style.animationDuration=(3+Math.random()*5)+"s";
-document.body.appendChild(d);
+function next(){
+
+document.getElementById("ui").innerHTML = `
+<h1>✨ ${story[step]}</h1>
+
+<p>
+Toca el universo para continuar…
+</p>
+
+<button onclick="touch()">🌌 Tocar universo</button>
+<button onclick="secret()">🔮 Algo oculto</button>
+`;
+
+step++;
+
 }
+
+/* =========================
+   INTERACCIÓN
+========================= */
+
+let clicks = 0;
+
+function touch(){
+
+clicks++;
+
+const panel = document.getElementById("panel");
+panel.style.display="block";
+
+if(clicks < 3){
+panel.innerText="🌌 El universo te observa en silencio...";
+}
+
+else if(clicks < 6){
+panel.innerText="✨ Algo empieza a reconocerte...";
+}
+
+else if(clicks < 10){
+panel.innerText="💜 El universo ya te siente cerca...";
+}
+
+else{
+panel.innerText="🌠 Conexión emocional establecida";
+final();
+}
+
+}
+
+/* =========================
+   MENSAJE OCULTO
+========================= */
+
+function secret(){
+
+document.getElementById("ui").innerHTML = `
+<h1>🔮 Mensaje oculto</h1>
+
+<p>
+No todos los universos aparecen por casualidad.<br><br>
+
+Algunos solo existen cuando alguien los necesita.
+</p>
+
+<button onclick="next()">Volver</button>
+`;
+
+}
+
+/* =========================
+   FINAL
+========================= */
+
+function final(){
+
+document.getElementById("ui").innerHTML = `
+<h1>🌌 Conexión completa</h1>
+
+<p>
+Ahora el universo ya no te observa…<br>
+te reconoce.
+</p>
+
+<button onclick="end()">💜 Ver mensaje final</button>
+`;
+
+}
+
+/* =========================
+   MENSAJE FINAL
+========================= */
+
+function end(){
+
+document.getElementById("ui").innerHTML = `
+<h1>💜 Mensaje final</h1>
+
+<p>
+Si este universo reaccionó a ti…<br><br>
+
+no fue por código.<br><br>
+
+fue porque alguien pensó en ti al crearlo.
+</p>
+
+<h2>🌌 Fin</h2>
+
+<button onclick="location.reload()">🔁 Reiniciar</button>
+`;
+
+}
+
+/* =========================
+   RESIZE
+========================= */
+
+window.addEventListener("resize",()=>{
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+});
 
 </script>
 
