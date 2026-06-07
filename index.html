@@ -14,7 +14,18 @@
 
 <body>
 
+<!-- CAPA DE ESTRELLAS -->
 <div id="stars"></div>
+
+<!-- LUNA -->
+<div class="moon"></div>
+
+<!-- PLANETAS -->
+<div class="planet planet1"></div>
+<div class="planet planet2"></div>
+
+<!-- PARTICULAS -->
+<div id="particles"></div>
 
 <header>
 
@@ -23,17 +34,23 @@
 <p>
 Hay lugares que se visitan...
 <br>
-y otros que simplemente se descubren.
+Y otros que simplemente se descubren.
 </p>
+
+<button id="musicButton">
+🎵 Activar ambiente
+</button>
 
 </header>
 
+<main>
+
 <section class="card">
 
-<h2>💌 Mensaje del día</h2>
+<h2>💌 Mensaje del Día</h2>
 
-<p class="result" id="mensaje">
-Pulsa el botón para descubrir algo bonito.
+<p id="mensaje">
+Presiona el botón para descubrir algo bonito.
 </p>
 
 <button onclick="mensajeAleatorio()">
@@ -44,9 +61,9 @@ Descubrir
 
 <section class="card">
 
-<h2>🎲 Pregunta curiosa</h2>
+<h2>🎲 Preguntas Curiosas</h2>
 
-<p class="result" id="pregunta">
+<p id="pregunta">
 ¿Qué descubrirás hoy?
 </p>
 
@@ -58,9 +75,9 @@ Generar
 
 <section class="card">
 
-<h2>🔮 Oráculo del universo</h2>
+<h2>🔮 Oráculo</h2>
 
-<p class="result" id="oraculo">
+<p id="oraculo">
 El universo guarda secretos...
 </p>
 
@@ -72,26 +89,34 @@ Consultar
 
 <section class="card">
 
-<h2>🐱 Mascota virtual</h2>
+<h2>🐱 Mascota Virtual</h2>
 
-<p class="result" id="gato">
+<div class="pet">
+
+<div class="pet-face">
+😺
+</div>
+
+<p id="petMessage">
 La mascota está observando...
 </p>
 
-<button onclick="acariciarGato()">
+<button onclick="acariciarMascota()">
 Acariciar
 </button>
+
+</div>
 
 </section>
 
 <section class="card">
 
-<h2>🌷 Jardín</h2>
+<h2>🌷 Jardín Cósmico</h2>
 
 <div id="jardin"></div>
 
 <button onclick="plantarFlor()">
-Plantar flor
+Plantar Flor
 </button>
 
 </section>
@@ -102,11 +127,11 @@ Plantar flor
 
 <p>
 Estrellas encontradas:
-<span id="contador">0</span>
+<span id="contadorEstrellas">0</span>
 </p>
 
 <button onclick="buscarEstrella()">
-Buscar estrella
+Buscar Estrella
 </button>
 
 </section>
@@ -117,9 +142,11 @@ Buscar estrella
 
 <div id="logros">
 
-<p>🔒 Explorador del universo</p>
-<p>🔒 Jardinero estelar</p>
-<p>🔒 Maestro de las cartas</p>
+<p>🔒 Explorador Cósmico</p>
+<p>🔒 Jardinero Estelar</p>
+<p>🔒 Maestro de las Cartas</p>
+<p>🔒 Guardián de la Luna</p>
+<p>🔒 Navegante Galáctico</p>
 
 </div>
 
@@ -127,34 +154,101 @@ Buscar estrella
 
 <section class="card">
 
-<h2>💌 Cartas ocultas</h2>
+<h2>💌 Cartas Secretas</h2>
 
-<p class="result" id="carta">
+<p id="carta">
 Todavía no has abierto ninguna carta.
 </p>
 
 <button onclick="abrirCarta()">
-Abrir carta
+Abrir Carta
 </button>
 
 </section>
 
-<section class="card secret" id="salaSecreta">
+<section class="card">
 
-<h2>🔓 Sala secreta</h2>
+<h2>📖 Libro de Recuerdos</h2>
 
-<p>
-Has descubierto un rincón oculto.
-<br><br>
-A veces los detalles pequeños son los más especiales.
-✨
+<textarea
+id="diario"
+placeholder="Escribe algo bonito para recordar..."
+></textarea>
+
+<br>
+
+<button onclick="guardarRecuerdo()">
+Guardar
+</button>
+
+</section>
+
+<section class="card">
+
+<h2>🎡 Ruleta del Universo</h2>
+
+<p id="ruletaResultado">
+Gira la ruleta.
+</p>
+
+<button onclick="girarRuleta()">
+Girar
+</button>
+
+</section>
+
+<section class="card">
+
+<h2>🎁 Cofre Misterioso</h2>
+
+<p id="cofre">
+¿Qué habrá dentro?
+</p>
+
+<button onclick="abrirCofre()">
+Abrir Cofre
+</button>
+
+</section>
+
+<section class="card">
+
+<h2>🌠 Observatorio</h2>
+
+<p id="observatorio">
+Analizando el cielo...
 </p>
 
 </section>
 
+<section id="salaSecreta" class="card secret">
+
+<h2>🔓 Sala Secreta</h2>
+
+<p>
+
+Si llegaste hasta aquí...
+
+Significa que exploraste cada rincón.
+
+Y quizá descubriste algo.
+
+Los detalles pequeños suelen esconder
+las cosas más especiales.
+
+✨
+
+</p>
+
+</section>
+
+</main>
+
 <footer>
 
-✨ Gracias por visitar este pequeño universo ✨
+<p>
+✨ Gracias por explorar este pequeño universo ✨
+</p>
 
 </footer>
 
