@@ -1,682 +1,554 @@
-/* ===========================
-   RESET
-=========================== */
+// =========================
+// PANTALLA DE INICIO
+// =========================
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+const startButton =
+document.getElementById("startButton");
+
+const welcomeScreen =
+document.getElementById("welcomeScreen");
+
+const mainContent =
+document.getElementById("mainContent");
+
+if(mainContent){
+
+mainContent.style.display="none";
+
 }
 
-html{
-scroll-behavior:smooth;
+if(startButton){
+
+startButton.addEventListener("click",()=>{
+
+welcomeScreen.style.opacity="0";
+
+setTimeout(()=>{
+
+welcomeScreen.style.display="none";
+
+mainContent.style.display="block";
+
+},800);
+
+});
+
 }
 
-body{
+// =========================
+// MENSAJES
+// =========================
 
-font-family:'Segoe UI',sans-serif;
+const messages=[
 
-background:
-linear-gradient(
-180deg,
-#050816,
-#0f172a,
-#1e1b4b,
-#0f172a
+"✨ Hay lugares que se visitan y otros que se descubren.",
+
+"🌷 Las pequeñas cosas suelen ser las más bonitas.",
+
+"⭐ Una estrella no compite con las demás, simplemente brilla.",
+
+"🌙 Algunas noches guardan secretos especiales.",
+
+"💜 Nunca subestimes el valor de una sonrisa.",
+
+"🦋 Hay días simples que terminan siendo inolvidables."
+
+];
+
+function newMessage(){
+
+let r=Math.floor(Math.random()*messages.length);
+
+document.getElementById("message").innerHTML=
+messages[r];
+
+}
+
+// =========================
+// PREGUNTAS
+// =========================
+
+const questions=[
+
+"¿Cuál es tu recuerdo favorito?",
+
+"¿Qué lugar del mundo te gustaría conocer?",
+
+"¿Qué canción representa tu semana?",
+
+"¿Qué te hace sentir en paz?",
+
+"¿Qué habilidad te gustaría aprender?",
+
+"¿Qué superpoder elegirías?",
+
+"¿Qué te hace feliz?"
+
+];
+
+function newQuestion(){
+
+let r=Math.floor(Math.random()*questions.length);
+
+document.getElementById("question").innerHTML=
+questions[r];
+
+}
+
+// =========================
+// ORACULO
+// =========================
+
+const oracleMessages=[
+
+"🌠 Algo bueno podría sorprenderte pronto.",
+
+"✨ Mantén la curiosidad encendida.",
+
+"🌙 El universo recomienda descansar un poco.",
+
+"⭐ Confía más en ti.",
+
+"🌷 Hoy es un buen día para sonreír."
+
+];
+
+function oracle(){
+
+let r=Math.floor(Math.random()*oracleMessages.length);
+
+document.getElementById("oracle").innerHTML=
+oracleMessages[r];
+
+}
+
+// =========================
+// JARDIN
+// =========================
+
+let flowers=
+Number(localStorage.getItem("flowers"))||0;
+
+function updateGarden(){
+
+const garden=
+document.getElementById("garden");
+
+if(garden){
+
+garden.innerHTML="🌷".repeat(flowers);
+
+}
+
+document.getElementById("flowerCount").innerHTML=
+flowers;
+
+}
+
+function plantFlower(){
+
+flowers++;
+
+localStorage.setItem(
+"flowers",
+flowers
 );
 
-color:white;
+updateGarden();
 
-overflow-x:hidden;
-
-min-height:100vh;
-
-position:relative;
+checkAchievements();
 
 }
 
-/* ===========================
-   ESTRELLAS
-=========================== */
+// =========================
+// ESTRELLAS
+// =========================
 
-#stars{
+let stars=
+Number(localStorage.getItem("stars"))||0;
 
-position:fixed;
+function updateStars(){
 
-top:0;
-left:0;
+const counter=
+document.getElementById("starCount");
 
-width:100%;
-height:100%;
+if(counter){
 
-z-index:-10;
+counter.innerHTML=stars;
 
-overflow:hidden;
-
-}
-
-/* ===========================
-   NEBULOSAS
-=========================== */
-
-body::before{
-
-content:"";
-
-position:fixed;
-
-width:500px;
-height:500px;
-
-background:
-rgba(168,85,247,.15);
-
-filter:blur(120px);
-
-top:-150px;
-left:-150px;
-
-z-index:-9;
-
-animation:nebulaMove 25s infinite alternate;
-
-}
-
-body::after{
-
-content:"";
-
-position:fixed;
-
-width:600px;
-height:600px;
-
-background:
-rgba(236,72,153,.15);
-
-filter:blur(140px);
-
-bottom:-250px;
-right:-250px;
-
-z-index:-9;
-
-animation:nebulaMove2 30s infinite alternate;
-
-}
-
-@keyframes nebulaMove{
-
-from{
-transform:translate(0,0);
-}
-
-to{
-transform:translate(150px,100px);
 }
 
 }
 
-@keyframes nebulaMove2{
+function collectStar(){
 
-from{
-transform:translate(0,0);
-}
+stars++;
 
-to{
-transform:translate(-150px,-100px);
-}
-
-}
-
-/* ===========================
-   LUNA
-=========================== */
-
-.moon{
-
-position:fixed;
-
-top:60px;
-right:80px;
-
-width:180px;
-height:180px;
-
-border-radius:50%;
-
-background:white;
-
-box-shadow:
-0 0 30px white,
-0 0 60px white,
-0 0 120px white;
-
-z-index:-3;
-
-animation:floatMoon 8s ease-in-out infinite;
-
-}
-
-@keyframes floatMoon{
-
-0%{
-transform:translateY(0);
-}
-
-50%{
-transform:translateY(-20px);
-}
-
-100%{
-transform:translateY(0);
-}
-
-}
-
-/* ===========================
-   PLANETAS
-=========================== */
-
-.planet{
-
-position:fixed;
-
-border-radius:50%;
-
-z-index:-4;
-
-}
-
-.planet1{
-
-width:120px;
-height:120px;
-
-background:
-linear-gradient(
-45deg,
-#00c6ff,
-#0072ff
+localStorage.setItem(
+"stars",
+stars
 );
 
-top:250px;
-left:50px;
+updateStars();
 
-animation:planetFloat 12s infinite ease-in-out;
+checkAchievements();
 
 }
 
-.planet2{
+// =========================
+// MASCOTA
+// =========================
 
-width:80px;
-height:80px;
+const petMessages=[
 
-background:
-linear-gradient(
-45deg,
-#ff6ec7,
-#ff9671
+"😺 La mascota está feliz.",
+
+"🐱 Miau.",
+
+"😸 Parece que quiere jugar.",
+
+"🐾 Has ganado puntos de ternura.",
+
+"😺 La mascota aprueba tu visita."
+
+];
+
+function petAction(){
+
+let r=Math.floor(
+Math.random()*petMessages.length
 );
 
-bottom:120px;
-right:120px;
-
-animation:planetFloat 8s infinite ease-in-out;
+document.getElementById("petText")
+.innerHTML=
+petMessages[r];
 
 }
 
-.planet3{
+// =========================
+// COFRES
+// =========================
 
-width:60px;
-height:60px;
+const chestRewards=[
 
-background:
-linear-gradient(
-45deg,
-#f9f871,
-#fcb045
+"⭐ Estrella dorada",
+
+"🌷 Flor brillante",
+
+"💜 Buena suerte",
+
+"🦋 Mariposa cósmica",
+
+"✨ Polvo estelar"
+
+];
+
+function openChest(){
+
+let r=Math.floor(
+Math.random()*chestRewards.length
 );
 
-top:450px;
-right:250px;
-
-animation:planetFloat 10s infinite ease-in-out;
-
-}
-
-@keyframes planetFloat{
-
-0%{
-transform:translateY(0);
-}
-
-50%{
-transform:translateY(-15px);
-}
-
-100%{
-transform:translateY(0);
-}
+document.getElementById("chestText")
+.innerHTML=
+chestRewards[r];
 
 }
 
-/* ===========================
-   PANTALLA DE INICIO
-=========================== */
+// =========================
+// RULETA
+// =========================
 
-#welcomeScreen{
+const roulette=[
 
-position:fixed;
+"🌙 Mirar el cielo",
 
-top:0;
-left:0;
+"🌷 Escuchar música",
 
-width:100%;
-height:100%;
+"⭐ Aprender algo nuevo",
 
-display:flex;
+"☕ Tomar algo rico",
 
-flex-direction:column;
+"✨ Hacer algo creativo",
 
-justify-content:center;
-align-items:center;
+"🦋 Dar un paseo"
 
-background:
-rgba(0,0,0,.9);
+];
 
-z-index:1000;
+function spinRoulette(){
 
-text-align:center;
-
-}
-
-#welcomeScreen h1{
-
-font-size:4rem;
-
-margin-bottom:20px;
-
-}
-
-#welcomeScreen p{
-
-font-size:1.2rem;
-
-margin-bottom:30px;
-
-}
-
-/* ===========================
-   HEADER
-=========================== */
-
-header{
-
-padding:120px 20px 60px;
-
-text-align:center;
-
-}
-
-header h1{
-
-font-size:4rem;
-
-margin-bottom:20px;
-
-text-shadow:
-0 0 20px white;
-
-}
-
-header p{
-
-max-width:700px;
-
-margin:auto;
-
-font-size:1.2rem;
-
-line-height:1.8;
-
-opacity:.9;
-
-}
-
-/* ===========================
-   TARJETAS
-=========================== */
-
-.glass{
-
-width:90%;
-
-max-width:1000px;
-
-margin:25px auto;
-
-padding:30px;
-
-background:
-rgba(255,255,255,.08);
-
-border:
-1px solid rgba(255,255,255,.15);
-
-backdrop-filter:blur(15px);
-
-border-radius:25px;
-
-box-shadow:
-0 0 30px rgba(255,255,255,.08);
-
-transition:.3s;
-
-}
-
-.glass:hover{
-
-transform:
-translateY(-5px);
-
-box-shadow:
-0 0 40px rgba(255,255,255,.15);
-
-}
-
-.glass h2{
-
-margin-bottom:20px;
-
-font-size:2rem;
-
-}
-
-/* ===========================
-   BOTONES
-=========================== */
-
-button{
-
-padding:14px 24px;
-
-border:none;
-
-border-radius:15px;
-
-cursor:pointer;
-
-font-size:16px;
-
-margin-top:15px;
-
-color:white;
-
-background:
-linear-gradient(
-45deg,
-#ec4899,
-#8b5cf6
+let r=Math.floor(
+Math.random()*roulette.length
 );
 
-transition:.3s;
+document.getElementById("rouletteResult")
+.innerHTML=
+roulette[r];
 
 }
 
-button:hover{
+// =========================
+// DIARIO
+// =========================
 
-transform:scale(1.05);
+const diary=
+document.getElementById("diary");
 
-box-shadow:
-0 0 20px #ec4899;
+if(diary){
 
-}
-
-/* ===========================
-   ESTADISTICAS
-=========================== */
-
-.stats{
-
-display:flex;
-
-justify-content:center;
-
-gap:20px;
-
-flex-wrap:wrap;
+diary.value=
+localStorage.getItem("diary")||"";
 
 }
 
-.statBox{
+function saveDiary(){
 
-padding:20px;
+if(diary){
 
-border-radius:20px;
-
-background:
-rgba(255,255,255,.05);
-
-min-width:120px;
-
-text-align:center;
-
-font-size:1.5rem;
-
-}
-
-/* ===========================
-   JARDIN
-=========================== */
-
-#garden{
-
-font-size:35px;
-
-line-height:2;
-
-min-height:80px;
-
-margin-top:15px;
-
-}
-
-/* ===========================
-   MASCOTA
-=========================== */
-
-#pet{
-
-font-size:5rem;
-
-animation:bounce 2s infinite;
-
-}
-
-@keyframes bounce{
-
-0%{
-transform:translateY(0);
-}
-
-50%{
-transform:translateY(-10px);
-}
-
-100%{
-transform:translateY(0);
-}
-
-}
-
-/* ===========================
-   MAPA GALACTICO
-=========================== */
-
-.map{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(200px,1fr));
-
-gap:20px;
-
-margin-top:20px;
-
-}
-
-.planetCard{
-
-padding:25px;
-
-border-radius:20px;
-
-background:
-rgba(255,255,255,.06);
-
-text-align:center;
-
-transition:.3s;
-
-cursor:pointer;
-
-}
-
-.planetCard:hover{
-
-transform:scale(1.05);
-
-}
-
-/* ===========================
-   DIARIO
-=========================== */
-
-textarea{
-
-width:100%;
-
-height:180px;
-
-padding:15px;
-
-border:none;
-
-border-radius:15px;
-
-background:
-rgba(255,255,255,.08);
-
-color:white;
-
-resize:none;
-
-outline:none;
-
-}
-
-/* ===========================
-   SALA SECRETA
-=========================== */
-
-.secret{
-
-display:none;
-
-background:
-linear-gradient(
-135deg,
-rgba(236,72,153,.15),
-rgba(139,92,246,.15)
+localStorage.setItem(
+"diary",
+diary.value
 );
 
-}
-
-/* ===========================
-   FOOTER
-=========================== */
-
-footer{
-
-padding:60px;
-
-text-align:center;
-
-opacity:.8;
-
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
-
-@media(max-width:768px){
-
-header h1{
-
-font-size:2.5rem;
-
-}
-
-#welcomeScreen h1{
-
-font-size:2.5rem;
-
-}
-
-.moon{
-
-width:100px;
-height:100px;
-
-right:20px;
-
-}
-
-.planet1{
-
-width:70px;
-height:70px;
-
-}
-
-.planet2{
-
-width:50px;
-height:50px;
-
-}
-
-.planet3{
-
-display:none;
-
-}
-
-.glass{
-
-padding:20px;
-
-}
-
-.glass h2{
-
-font-size:1.4rem;
-
-}
-
-button{
-
-width:100%;
-
-}
-
-.stats{
-
-flex-direction:column;
+alert("📖 Guardado");
 
 }
 
 }
+
+// =========================
+// LOGROS
+// =========================
+
+function checkAchievements(){
+
+let total=0;
+
+let html="";
+
+if(stars>=10){
+
+html+="<p>🏆 Explorador</p>";
+
+total++;
+
+}else{
+
+html+="<p>🔒 Explorador</p>";
+
+}
+
+if(flowers>=10){
+
+html+="<p>🏆 Jardinero</p>";
+
+total++;
+
+}else{
+
+html+="<p>🔒 Jardinero</p>";
+
+}
+
+if(stars>=25){
+
+html+="<p>🏆 Navegante Estelar</p>";
+
+total++;
+
+}else{
+
+html+="<p>🔒 Navegante Estelar</p>";
+
+}
+
+const achievementBox=
+document.getElementById("achievements");
+
+if(achievementBox){
+
+achievementBox.innerHTML=html;
+
+}
+
+const achievementCount=
+document.getElementById("achievementCount");
+
+if(achievementCount){
+
+achievementCount.innerHTML=total;
+
+}
+
+if(total>=3){
+
+const room=
+document.getElementById("secretRoom");
+
+if(room){
+
+room.style.display="block";
+
+}
+
+}
+
+}
+
+// =========================
+// ESTRELLAS DE FONDO
+// =========================
+
+const starsContainer=
+document.getElementById("stars");
+
+if(starsContainer){
+
+for(let i=0;i<300;i++){
+
+let star=
+document.createElement("div");
+
+star.innerHTML="✦";
+
+star.style.position="absolute";
+
+star.style.left=
+Math.random()*100+"%";
+
+star.style.top=
+Math.random()*100+"%";
+
+star.style.color="white";
+
+star.style.opacity=
+Math.random();
+
+star.style.fontSize=
+(5+Math.random()*15)+"px";
+
+star.style.cursor="pointer";
+
+star.addEventListener("click",()=>{
+
+collectStar();
+
+star.remove();
+
+});
+
+starsContainer.appendChild(star);
+
+}
+
+}
+
+// =========================
+// ESTRELLAS FUGACES
+// =========================
+
+function shootingStar(){
+
+let s=
+document.createElement("div");
+
+s.style.position="fixed";
+
+s.style.width="3px";
+
+s.style.height="120px";
+
+s.style.background=
+"linear-gradient(white,transparent)";
+
+s.style.transform=
+"rotate(45deg)";
+
+s.style.left=
+Math.random()*window.innerWidth+"px";
+
+s.style.top=
+Math.random()*300+"px";
+
+s.style.pointerEvents="none";
+
+document.body.appendChild(s);
+
+let x=parseInt(s.style.left);
+let y=parseInt(s.style.top);
+
+let move=setInterval(()=>{
+
+x+=20;
+y+=20;
+
+s.style.left=x+"px";
+s.style.top=y+"px";
+
+},20);
+
+setTimeout(()=>{
+
+clearInterval(move);
+
+s.remove();
+
+},1000);
+
+}
+
+setInterval(
+
+shootingStar,
+
+3000
+
+);
+
+// =========================
+// CURSOR MAGICO
+// =========================
+
+document.addEventListener(
+"mousemove",
+e=>{
+
+let sparkle=
+document.createElement("div");
+
+sparkle.innerHTML="✨";
+
+sparkle.style.position="fixed";
+
+sparkle.style.left=
+e.clientX+"px";
+
+sparkle.style.top=
+e.clientY+"px";
+
+sparkle.style.pointerEvents="none";
+
+sparkle.style.fontSize="12px";
+
+document.body.appendChild(
+sparkle
+);
+
+setTimeout(()=>{
+
+sparkle.remove();
+
+},500);
+
+}
+);
+
+// =========================
+// INICIO
+// =========================
+
+updateGarden();
+
+updateStars();
+
+checkAchievements();
