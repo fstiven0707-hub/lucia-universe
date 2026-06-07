@@ -1,344 +1,165 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>✨ Universo de Lucía ✨</title>
 
-<style>
+<title>✨ Un Pequeño Universo ✨</title>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+<link rel="stylesheet" href="style.css">
 
-body{
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#1e1e3f,#3d246c,#5c469c);
-min-height:100vh;
-overflow-x:hidden;
-color:white;
-text-align:center;
-}
-
-header{
-padding:60px 20px;
-}
-
-h1{
-font-size:3rem;
-margin-bottom:10px;
-}
-
-.sub{
-font-size:1.2rem;
-opacity:.9;
-}
-
-.card{
-background:rgba(255,255,255,.12);
-backdrop-filter:blur(10px);
-padding:25px;
-margin:20px auto;
-border-radius:20px;
-width:90%;
-max-width:800px;
-box-shadow:0 0 20px rgba(0,0,0,.3);
-}
-
-button{
-padding:12px 20px;
-border:none;
-border-radius:15px;
-cursor:pointer;
-font-size:16px;
-margin-top:15px;
-background:#ff6bb5;
-color:white;
-transition:.3s;
-}
-
-button:hover{
-transform:scale(1.05);
-}
-
-#mensaje,
-#pregunta,
-#oraculo,
-#gato{
-margin-top:15px;
-font-size:18px;
-}
-
-.flower{
-font-size:25px;
-margin:5px;
-display:inline-block;
-}
-
-footer{
-padding:50px;
-opacity:.8;
-}
-
-.stars{
-position:fixed;
-width:100%;
-height:100%;
-top:0;
-left:0;
-pointer-events:none;
-overflow:hidden;
-}
-
-.star{
-position:absolute;
-color:white;
-animation:float 8s linear infinite;
-opacity:.8;
-}
-
-@keyframes float{
-from{
-transform:translateY(100vh);
-}
-to{
-transform:translateY(-100px);
-}
-}
-
-</style>
 </head>
 
 <body>
 
-<div class="stars" id="stars"></div>
+<div id="stars"></div>
 
 <header>
-<h1>✨ El Universo de Lucía ✨</h1>
 
-<p class="sub">
-Un pequeño rincón lleno de sorpresas 🌷
+<h1>✨ Un Pequeño Universo ✨</h1>
+
+<p>
+Hay lugares que se visitan...
+<br>
+y otros que simplemente se descubren.
 </p>
+
 </header>
 
-<div class="card">
+<section class="card">
 
-<h2>💌 Mensaje del Día</h2>
+<h2>💌 Mensaje del día</h2>
 
-<p id="mensaje">
-Presiona el botón
+<p class="result" id="mensaje">
+Pulsa el botón para descubrir algo bonito.
 </p>
 
-<button onclick="mensaje()">
+<button onclick="mensajeAleatorio()">
 Descubrir
 </button>
 
-</div>
+</section>
 
-<div class="card">
+<section class="card">
 
-<h2>🎲 Pregunta Aleatoria</h2>
+<h2>🎲 Pregunta curiosa</h2>
 
-<p id="pregunta">
+<p class="result" id="pregunta">
 ¿Qué descubrirás hoy?
 </p>
 
-<button onclick="pregunta()">
+<button onclick="preguntaAleatoria()">
 Generar
 </button>
 
-</div>
+</section>
 
-<div class="card">
+<section class="card">
 
-<h2>🔮 Oráculo del Universo</h2>
+<h2>🔮 Oráculo del universo</h2>
 
-<p id="oraculo">
-Consulta tu destino...
+<p class="result" id="oraculo">
+El universo guarda secretos...
 </p>
 
-<button onclick="oraculo()">
+<button onclick="consultarOraculo()">
 Consultar
 </button>
 
-</div>
+</section>
 
-<div class="card">
+<section class="card">
 
-<h2>🐱 Gato Virtual</h2>
+<h2>🐱 Mascota virtual</h2>
 
-<p id="gato">
-El gato está observando...
+<p class="result" id="gato">
+La mascota está observando...
 </p>
 
-<button onclick="miau()">
+<button onclick="acariciarGato()">
 Acariciar
 </button>
 
-</div>
+</section>
 
-<div class="card">
+<section class="card">
 
-<h2>🌷 Jardín de Flores</h2>
+<h2>🌷 Jardín</h2>
 
 <div id="jardin"></div>
 
-<button onclick="flor()">
-Plantar Flor
+<button onclick="plantarFlor()">
+Plantar flor
 </button>
 
+</section>
+
+<section class="card">
+
+<h2>⭐ Exploración</h2>
+
+<p>
+Estrellas encontradas:
+<span id="contador">0</span>
+</p>
+
+<button onclick="buscarEstrella()">
+Buscar estrella
+</button>
+
+</section>
+
+<section class="card">
+
+<h2>🏆 Logros</h2>
+
+<div id="logros">
+
+<p>🔒 Explorador del universo</p>
+<p>🔒 Jardinero estelar</p>
+<p>🔒 Maestro de las cartas</p>
+
 </div>
 
-<div class="card">
+</section>
 
-<h2>🌙 Saludo Especial</h2>
+<section class="card">
 
-<p id="saludo"></p>
+<h2>💌 Cartas ocultas</h2>
 
-</div>
+<p class="result" id="carta">
+Todavía no has abierto ninguna carta.
+</p>
+
+<button onclick="abrirCarta()">
+Abrir carta
+</button>
+
+</section>
+
+<section class="card secret" id="salaSecreta">
+
+<h2>🔓 Sala secreta</h2>
+
+<p>
+Has descubierto un rincón oculto.
+<br><br>
+A veces los detalles pequeños son los más especiales.
+✨
+</p>
+
+</section>
 
 <footer>
 
-💜 Hecho con cariño para Lucía 💜
+✨ Gracias por visitar este pequeño universo ✨
 
 </footer>
 
-<script>
-
-const mensajes=[
-
-"🌸 Tu sonrisa ilumina más de lo que imaginas.",
-
-"🦋 Nunca olvides lo especial que eres.",
-
-"✨ Hoy puede ser un día maravilloso.",
-
-"🌷 Hay personas que hacen este mundo más bonito.",
-
-"💜 Mereces cosas buenas."
-];
-
-function mensaje(){
-
-let r=Math.floor(Math.random()*mensajes.length);
-
-document.getElementById("mensaje").innerHTML=mensajes[r];
-
-}
-
-const preguntas=[
-
-"¿Qué lugar te gustaría visitar?",
-
-"¿Qué canción define tu semana?",
-
-"¿Cuál es tu recuerdo favorito?",
-
-"¿Qué te hace feliz?",
-
-"¿Qué sueño quieres cumplir?"
-];
-
-function pregunta(){
-
-let r=Math.floor(Math.random()*preguntas.length);
-
-document.getElementById("pregunta").innerHTML=preguntas[r];
-
-}
-
-const destinos=[
-
-"⭐ Hoy encontrarás algo bonito.",
-
-"🌙 El universo recomienda sonreír.",
-
-"✨ Algo bueno viene en camino.",
-
-"🌷 Tu energía está brillando.",
-
-"💜 Confía un poco más en ti."
-];
-
-function oraculo(){
-
-let r=Math.floor(Math.random()*destinos.length);
-
-document.getElementById("oraculo").innerHTML=destinos[r];
-
-}
-
-const gatos=[
-
-"🐱 Miau Lucía.",
-
-"🐱 El gato aprueba tu existencia.",
-
-"🐱 El gato exige cariño.",
-
-"🐱 El gato cree que eres genial.",
-
-"🐱 Misión cumplida."
-];
-
-function miau(){
-
-let r=Math.floor(Math.random()*gatos.length);
-
-document.getElementById("gato").innerHTML=gatos[r];
-
-}
-
-function flor(){
-
-document.getElementById("jardin").innerHTML +=
-'<span class="flower">🌷</span>';
-
-}
-
-let hora=new Date().getHours();
-
-let saludo="";
-
-if(hora<12){
-
-saludo="☀️ Buenos días Lucía";
-
-}else if(hora<18){
-
-saludo="🌤️ Buenas tardes Lucía";
-
-}else{
-
-saludo="🌙 Buenas noches Lucía";
-
-}
-
-document.getElementById("saludo").innerHTML=saludo;
-
-for(let i=0;i<50;i++){
-
-let star=document.createElement("div");
-
-star.classList.add("star");
-
-star.innerHTML="⭐";
-
-star.style.left=Math.random()*100+"%";
-
-star.style.animationDuration=(5+Math.random()*10)+"s";
-
-star.style.fontSize=(10+Math.random()*20)+"px";
-
-document.getElementById("stars").appendChild(star);
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
+
 </html>
-```
