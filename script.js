@@ -6,23 +6,24 @@ const mensajes = [
 
 "🌷 Algunos días parecen normales hasta que se convierten en recuerdos bonitos.",
 
-"✨ Hay personas que mejoran los lugares simplemente estando allí.",
+"✨ Hay personas que dejan una huella especial sin darse cuenta.",
 
-"🦋 A veces las mejores cosas llegan sin avisar.",
+"🦋 A veces la magia está en los detalles.",
 
-"🌙 Incluso una pequeña luz destaca en la oscuridad.",
+"🌙 Incluso las noches más oscuras tienen estrellas.",
 
-"💜 Nunca subestimes el valor de una sonrisa sincera.",
+"💜 Nunca subestimes el valor de una sonrisa.",
 
-"🌸 Hay momentos simples que terminan siendo los más especiales."
+"🌸 Hoy puede ser un día especial."
 
 ];
 
 function mensajeAleatorio(){
 
-let r = Math.floor(Math.random()*mensajes.length);
+let r=Math.floor(Math.random()*mensajes.length);
 
-document.getElementById("mensaje").innerHTML = mensajes[r];
+document.getElementById("mensaje").innerHTML=
+mensajes[r];
 
 }
 
@@ -30,93 +31,93 @@ document.getElementById("mensaje").innerHTML = mensajes[r];
 // PREGUNTAS
 // ======================
 
-const preguntas = [
+const preguntas=[
 
-"¿Qué lugar te gustaría visitar algún día?",
+"¿Qué lugar te gustaría conocer?",
 
-"¿Qué canción representa tu semana?",
+"¿Cuál es tu recuerdo favorito?",
+
+"¿Qué canción te representa hoy?",
 
 "¿Qué te hace sentir en paz?",
 
-"¿Qué recuerdo te hace sonreír?",
+"¿Qué sueño te gustaría cumplir?",
 
-"¿Qué habilidad te gustaría aprender?",
+"¿Qué superpoder elegirías?",
 
-"¿Qué harías si pudieras viajar en el tiempo?",
-
-"¿Cuál es tu comida favorita para un día feliz?"
+"¿Qué te hace sonreír sin razón?"
 
 ];
 
 function preguntaAleatoria(){
 
-let r = Math.floor(Math.random()*preguntas.length);
+let r=Math.floor(Math.random()*preguntas.length);
 
-document.getElementById("pregunta").innerHTML = preguntas[r];
+document.getElementById("pregunta").innerHTML=
+preguntas[r];
 
 }
 
 // ======================
-// ORACULO
+// ORÁCULO
 // ======================
 
-const oraculos = [
+const oraculos=[
 
-"⭐ Algo interesante podría sorprenderte pronto.",
+"⭐ Algo bueno podría sorprenderte pronto.",
 
-"🌙 El universo recomienda descansar un poco más.",
+"🌷 Hoy es un buen día para darte un gusto.",
 
-"🌷 Hoy es buen día para darte un gusto.",
+"🌙 Confía un poco más en ti.",
 
 "✨ Mantén la curiosidad encendida.",
 
-"🦋 Confía más en tu intuición.",
-
-"💜 Algo bonito puede aparecer donde menos lo esperas."
+"🦋 Algo bonito viene en camino."
 
 ];
 
 function consultarOraculo(){
 
-let r = Math.floor(Math.random()*oraculos.length);
+let r=Math.floor(Math.random()*oraculos.length);
 
-document.getElementById("oraculo").innerHTML = oraculos[r];
+document.getElementById("oraculo").innerHTML=
+oraculos[r];
 
 }
 
 // ======================
-// GATO
+// MASCOTA
 // ======================
 
-const gatos = [
+const mascota=[
 
 "🐱 Miau.",
 
-"🐱 El gato aprueba tu energía de hoy.",
-
 "🐱 El gato cree que deberías sonreír.",
 
-"🐱 +10 puntos de ternura.",
+"🐱 Has recibido +10 puntos de ternura.",
 
-"🐱 El gato está orgulloso de ti.",
+"🐱 El gato aprueba tu energía.",
 
-"🐱 Has recibido un maullido legendario."
+"🐱 El gato exige cariño."
 
 ];
 
-function acariciarGato(){
+function acariciarMascota(){
 
-let r = Math.floor(Math.random()*gatos.length);
+let r=Math.floor(Math.random()*mascota.length);
 
-document.getElementById("gato").innerHTML = gatos[r];
+document.getElementById("petMessage").innerHTML=
+mascota[r];
 
 }
 
 // ======================
-// JARDIN
+// JARDÍN
 // ======================
 
-let flores = Number(localStorage.getItem("flores")) || 0;
+let flores =
+Number(localStorage.getItem("flores")) || 0;
 
 function actualizarJardin(){
 
@@ -150,7 +151,7 @@ estrellas++;
 
 localStorage.setItem("estrellas",estrellas);
 
-document.getElementById("contador").innerHTML =
+document.getElementById("contadorEstrellas").innerHTML=
 estrellas;
 
 verificarLogros();
@@ -164,25 +165,25 @@ verificarLogros();
 let cartasAbiertas =
 Number(localStorage.getItem("cartas")) || 0;
 
-const cartas = [
+const cartas=[
 
-"💌 A veces los pequeños detalles son los que más se recuerdan.",
+"💌 Algunas personas hacen este mundo un poco más bonito.",
 
-"💌 Algunas personas dejan huellas bonitas sin darse cuenta.",
+"💌 Los pequeños detalles suelen ser los más memorables.",
 
-"💌 Gracias por dedicar unos minutos a explorar este rincón.",
+"💌 Nunca subestimes el valor de una conversación agradable.",
 
-"💌 Hay días que merecen guardarse para siempre.",
+"💌 Gracias por explorar este rincón del universo.",
 
-"💌 Nunca está de más recordar que las cosas simples también tienen magia."
+"💌 Hay momentos simples que merecen quedarse para siempre."
 
 ];
 
 function abrirCarta(){
 
-let r = Math.floor(Math.random()*cartas.length);
+let r=Math.floor(Math.random()*cartas.length);
 
-document.getElementById("carta").innerHTML =
+document.getElementById("carta").innerHTML=
 cartas[r];
 
 cartasAbiertas++;
@@ -194,6 +195,121 @@ verificarLogros();
 }
 
 // ======================
+// DIARIO
+// ======================
+
+const diario =
+document.getElementById("diario");
+
+if(diario){
+
+diario.value =
+localStorage.getItem("recuerdo") || "";
+
+}
+
+function guardarRecuerdo(){
+
+localStorage.setItem(
+"recuerdo",
+diario.value
+);
+
+alert("📖 Recuerdo guardado");
+
+}
+
+// ======================
+// RULETA
+// ======================
+
+const premios=[
+
+"🌷 Escuchar una canción nueva",
+
+"☕ Tomar algo rico",
+
+"🌙 Mirar las estrellas",
+
+"📚 Aprender algo curioso",
+
+"🦋 Dar un paseo",
+
+"✨ Sonreír más"
+
+];
+
+function girarRuleta(){
+
+let r=Math.floor(
+Math.random()*premios.length
+);
+
+document.getElementById("ruletaResultado")
+.innerHTML=premios[r];
+
+}
+
+// ======================
+// COFRE
+// ======================
+
+const tesoros=[
+
+"⭐ Encontraste polvo estelar",
+
+"🌷 Encontraste una flor mágica",
+
+"💜 Encontraste buena suerte",
+
+"🦋 Encontraste una mariposa cósmica",
+
+"✨ Encontraste una estrella brillante"
+
+];
+
+function abrirCofre(){
+
+let r=Math.floor(
+Math.random()*tesoros.length
+);
+
+document.getElementById("cofre")
+.innerHTML=tesoros[r];
+
+}
+
+// ======================
+// OBSERVATORIO
+// ======================
+
+const hora=new Date().getHours();
+
+let mensajeHora="";
+
+if(hora<12){
+
+mensajeHora=
+"☀️ El cielo está iluminado por la mañana.";
+
+}
+else if(hora<18){
+
+mensajeHora=
+"🌤️ La tarde se ve tranquila.";
+
+}
+else{
+
+mensajeHora=
+"🌙 Las estrellas dominan el cielo.";
+
+}
+
+document.getElementById("observatorio")
+.innerHTML=mensajeHora;
+
+// ======================
 // LOGROS
 // ======================
 
@@ -201,49 +317,49 @@ function verificarLogros(){
 
 let html="";
 
-if(estrellas >= 10){
+if(estrellas>=10){
 
-html += "<p>🏆 Explorador del universo</p>";
-
-}else{
-
-html += "<p>🔒 Explorador del universo</p>";
-
-}
-
-if(flores >= 15){
-
-html += "<p>🏆 Jardinero estelar</p>";
+html+="<p>🏆 Explorador Cósmico</p>";
 
 }else{
 
-html += "<p>🔒 Jardinero estelar</p>";
+html+="<p>🔒 Explorador Cósmico</p>";
 
 }
 
-if(cartasAbiertas >= 5){
+if(flores>=15){
 
-html += "<p>🏆 Maestro de las cartas</p>";
+html+="<p>🏆 Jardinero Estelar</p>";
 
 }else{
 
-html += "<p>🔒 Maestro de las cartas</p>";
+html+="<p>🔒 Jardinero Estelar</p>";
 
 }
 
-document.getElementById("logros").innerHTML =
-html;
+if(cartasAbiertas>=5){
 
-if(
-estrellas >= 10 &&
-flores >= 15 &&
-cartasAbiertas >= 5
-){
+html+="<p>🏆 Maestro de las Cartas</p>";
 
-document.getElementById("salaSecreta").style.display =
-"block";
+}else{
+
+html+="<p>🔒 Maestro de las Cartas</p>";
 
 }
+
+if(estrellas>=10 &&
+flores>=15 &&
+cartasAbiertas>=5){
+
+html+="<p>🏆 Guardián del Universo</p>";
+
+document.getElementById("salaSecreta")
+.style.display="block";
+
+}
+
+document.getElementById("logros")
+.innerHTML=html;
 
 }
 
@@ -251,24 +367,24 @@ document.getElementById("salaSecreta").style.display =
 // ESTRELLAS DE FONDO
 // ======================
 
-for(let i=0;i<120;i++){
+for(let i=0;i<250;i++){
 
-let star = document.createElement("div");
+let star=document.createElement("div");
 
 star.className="star";
 
-star.innerHTML="⭐";
+star.innerHTML="✦";
 
-star.style.left =
-Math.random()*100 + "%";
+star.style.left=
+Math.random()*100+"%";
 
-star.style.top =
-Math.random()*100 + "%";
+star.style.top=
+Math.random()*100+"%";
 
-star.style.fontSize =
-(10 + Math.random()*20) + "px";
+star.style.fontSize=
+(6+Math.random()*18)+"px";
 
-star.style.opacity =
+star.style.opacity=
 Math.random();
 
 document.getElementById("stars")
@@ -277,12 +393,114 @@ document.getElementById("stars")
 }
 
 // ======================
+// ESTRELLAS FUGACES
+// ======================
+
+function crearEstrellaFugaz(){
+
+let estrella=
+document.createElement("div");
+
+estrella.style.position="fixed";
+
+estrella.style.width="3px";
+
+estrella.style.height="120px";
+
+estrella.style.background=
+"linear-gradient(white,transparent)";
+
+estrella.style.top=
+Math.random()*300+"px";
+
+estrella.style.left=
+Math.random()*window.innerWidth+"px";
+
+estrella.style.transform=
+"rotate(45deg)";
+
+estrella.style.zIndex="-1";
+
+estrella.style.pointerEvents="none";
+
+document.body.appendChild(estrella);
+
+let x=parseInt(estrella.style.left);
+
+let y=parseInt(estrella.style.top);
+
+let mover=setInterval(()=>{
+
+x+=25;
+
+y+=25;
+
+estrella.style.left=x+"px";
+
+estrella.style.top=y+"px";
+
+},20);
+
+setTimeout(()=>{
+
+clearInterval(mover);
+
+estrella.remove();
+
+},1200);
+
+}
+
+setInterval(
+
+crearEstrellaFugaz,
+
+4000
+
+);
+
+// ======================
+// CURSOR CON BRILLOS
+// ======================
+
+document.addEventListener(
+"mousemove",
+e=>{
+
+const brillo=
+document.createElement("div");
+
+brillo.innerHTML="✨";
+
+brillo.style.position="fixed";
+
+brillo.style.left=e.clientX+"px";
+
+brillo.style.top=e.clientY+"px";
+
+brillo.style.pointerEvents="none";
+
+brillo.style.fontSize="12px";
+
+document.body.appendChild(brillo);
+
+setTimeout(()=>{
+
+brillo.remove();
+
+},700);
+
+}
+);
+
+// ======================
 // INICIO
 // ======================
 
 actualizarJardin();
 
-document.getElementById("contador").innerHTML =
-estrellas;
+document.getElementById(
+"contadorEstrellas"
+).innerHTML=estrellas;
 
 verificarLogros();
