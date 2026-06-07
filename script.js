@@ -1,23 +1,21 @@
 /* =========================
-   UNIVERSO INTERACTIVO
-   NIVEL DIOS SCRIPT
+   UNIVERSO VIVO (CANVAS)
 ========================= */
 
-/* CANVAS SETUP */
 const canvas = document.getElementById("space");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
+let stars = [];
 
-/* CREAR PARTÍCULAS */
-function initUniverse(){
-particles = [];
+function createStars(){
 
-for(let i=0;i<140;i++){
-particles.push({
+stars = [];
+
+for(let i=0;i<130;i++){
+stars.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 r:Math.random()*2,
@@ -25,30 +23,32 @@ dx:(Math.random()-0.5)*0.4,
 dy:(Math.random()-0.5)*0.4
 });
 }
+
 }
 
-initUniverse();
+createStars();
 
-/* ANIMACIÓN UNIVERSO */
+/* =========================
+   ANIMACIÓN UNIVERSO
+========================= */
+
 function animate(){
 
 ctx.fillStyle="rgba(5,8,20,0.35)";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 
-ctx.fillStyle="rgba(255,255,255,0.8)";
+ctx.fillStyle="white";
 
-particles.forEach(p=>{
+stars.forEach(s=>{
 
-p.x += p.dx;
-p.y += p.dy;
+s.x += s.dx;
+s.y += s.dy;
 
-/* rebote suave */
-if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
-if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+if(s.x < 0 || s.x > canvas.width) s.dx *= -1;
+if(s.y < 0 || s.y > canvas.height) s.dy *= -1;
 
-/* dibujar */
 ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
 ctx.fill();
 
 });
@@ -59,31 +59,34 @@ requestAnimationFrame(animate);
 animate();
 
 /* =========================
-   HISTORIA DINÁMICA
+   HISTORIA EMOCIONAL
 ========================= */
 
-let stage = 0;
+let step = 0;
 let clicks = 0;
 
-/* textos emocionales */
 const story = [
-"El universo detecta tu presencia 🌌",
-"Las estrellas comienzan a reaccionar ✨",
-"Algo invisible se está conectando...",
-"El espacio te reconoce...",
-"Última fase de sincronización..."
+"Intento entender qué eres…",
+"Pero algo en ti ya me resulta familiar.",
+"No llegaste aquí por error.",
+"El universo rara vez se equivoca.",
+"Y contigo… no fue la excepción."
 ];
 
 /* =========================
-   INICIO EXPERIENCIA
+   INICIO
 ========================= */
 
 function start(){
 
 document.getElementById("ui").innerHTML = `
-<h1>🌙 Sincronizando universo...</h1>
-<p>Espera un momento, todo está conectándose contigo</p>
-<button onclick="next()">Continuar</button>
+<h1>🌙 Sincronizando conexión...</h1>
+
+<p>
+Se está ajustando el universo a tu energía…
+</p>
+
+<button onclick="next()">✨ Continuar</button>
 `;
 
 }
@@ -95,15 +98,17 @@ document.getElementById("ui").innerHTML = `
 function next(){
 
 document.getElementById("ui").innerHTML = `
-<h1>✨ ${story[stage] || "Conexión completa"}</h1>
+<h1>✨ ${story[step] || "Conexión establecida"}</h1>
 
-<p>Interactúa con el universo tocando la pantalla</p>
+<p>
+Interactúa con el universo.
+</p>
 
-<button onclick="interact()">🌌 Tocar universo</button>
+<button onclick="touch()">🌌 Tocar universo</button>
 <button onclick="secret()">🔮 Mensaje oculto</button>
 `;
 
-stage++;
+step++;
 
 }
 
@@ -111,28 +116,32 @@ stage++;
    INTERACCIÓN PRINCIPAL
 ========================= */
 
-function interact(){
+function touch(){
 
 clicks++;
 
 const panel = document.getElementById("panel");
 panel.style.display = "block";
 
-if(clicks < 3){
-panel.innerText = "🌌 El universo te observa en silencio...";
+if(clicks <= 2){
+panel.innerText = "🌌 El universo te está observando...";
 }
 
-else if(clicks < 6){
-panel.innerText = "✨ Algo está respondiendo a tu energía...";
+else if(clicks <= 5){
+panel.innerText = "✨ Empieza a reconocerte...";
 }
 
-else if(clicks < 10){
-panel.innerText = "💫 El universo empieza a recordarte...";
+else if(clicks <= 8){
+panel.innerText = "💜 Ya hay conexión emocional...";
+}
+
+else if(clicks <= 11){
+panel.innerText = "🌠 El universo responde a tu presencia...";
 }
 
 else{
-panel.innerText = "🌠 Conexión completa establecida";
-unlockFinal();
+panel.innerText = "🌌 Conexión completa establecida";
+final();
 }
 
 }
@@ -147,33 +156,31 @@ document.getElementById("ui").innerHTML = `
 <h1>🔮 Mensaje oculto</h1>
 
 <p>
-No todos los universos son visibles...<br><br>
+No todos los universos se pueden explicar…<br><br>
 
-Algunos solo existen cuando alguien especial los mira ✨
+algunos solo se sienten.
 </p>
 
-<button onclick="next()">Volver</button>
+<button onclick="next()">↩ Volver</button>
 `;
 
 }
 
 /* =========================
-   FINAL NIVEL DIOS
+   FINAL
 ========================= */
 
-function unlockFinal(){
+function final(){
 
 document.getElementById("ui").innerHTML = `
-<h1>🌌 Universo sincronizado</h1>
+<h1>🌌 Conexión completa</h1>
 
 <p>
-Has activado una conexión única.<br><br>
-
-Este universo no es un programa...<br>
-es una respuesta.
+El universo ya no te observa.<br>
+Ahora te reconoce.
 </p>
 
-<button onclick="finalMessage()">💜 Ver mensaje final</button>
+<button onclick="end()">💜 Ver mensaje final</button>
 `;
 
 }
@@ -182,32 +189,24 @@ es una respuesta.
    MENSAJE FINAL
 ========================= */
 
-function finalMessage(){
+function end(){
 
 document.getElementById("ui").innerHTML = `
 <h1>💜 Mensaje final</h1>
 
 <p>
-Si estás leyendo esto,<br><br>
+Si este universo reaccionó a ti…<br><br>
 
-significa que alguien creó este universo pensando en ti.<br><br>
+no fue casualidad.<br><br>
 
-✨ Y eso ya lo cambia todo.
+fue intención.
 </p>
 
 <h2>🌌 Fin de la experiencia</h2>
 
-<button onclick="restart()">🔁 Reiniciar universo</button>
+<button onclick="location.reload()">🔁 Reiniciar universo</button>
 `;
 
-}
-
-/* =========================
-   REINICIO
-========================= */
-
-function restart(){
-location.reload();
 }
 
 /* =========================
@@ -219,24 +218,21 @@ window.addEventListener("resize",()=>{
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-initUniverse();
+createStars();
 
 });
 
 /* =========================
-   CLICK GLOBAL (EXTRA MAGIC)
+   EXTRA: CLICK SUAVE OCULTO
 ========================= */
 
-document.addEventListener("click",(e)=>{
-
-if(!document.getElementById("panel")) return;
+document.addEventListener("click", (e)=>{
 
 const panel = document.getElementById("panel");
 
+if(panel){
 panel.style.opacity = "1";
-
-setTimeout(()=>{
-panel.style.opacity = "0.7";
-},800);
+setTimeout(()=> panel.style.opacity = "0.7", 800);
+}
 
 });
