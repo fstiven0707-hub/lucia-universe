@@ -5,66 +5,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🌙 Cosmic Gift Universe</title>
+<title>🌌 Cosmic Universe Experience</title>
 
 <style>
 
 /* =========================
-   BASE SUAVE COSMOS
+   BASE CINEMÁTICA SUAVE
 ========================= */
 
 body{
 margin:0;
-font-family: 'Segoe UI', sans-serif;
-background: radial-gradient(circle at top,#0b1020,#070a14,#0a0f1f);
-color:#eaf0ff;
-overflow-x:hidden;
+overflow:hidden;
+font-family:Segoe UI;
+background: radial-gradient(circle at top,#050816,#070b18,#02030a);
+color:white;
 }
 
-/* estrellas suaves */
-.star{
+/* CANVAS UNIVERSO */
+canvas{
 position:fixed;
-background:white;
-border-radius:50%;
-opacity:.4;
-animation:floatStar 6s infinite ease-in-out;
-}
-
-@keyframes floatStar{
-0%,100%{transform:translateY(0); opacity:.2;}
-50%{transform:translateY(-10px); opacity:.7;}
+top:0;
+left:0;
 }
 
 /* =========================
-   HEADER SUAVE
+   UI FLUIDA
 ========================= */
 
-header{
+.ui{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 text-align:center;
-padding:80px 20px 40px;
+z-index:10;
+padding:20px;
 }
 
-header h1{
+h1{
 font-size:3rem;
-font-weight:600;
-color:#dbe7ff;
+opacity:.9;
 }
 
-header p{
-opacity:.7;
+p{
 max-width:600px;
-margin:auto;
+opacity:.7;
 }
 
-/* =========================
-   BOTONES SUAVES
-========================= */
-
+/* BOTÓN PREMIUM */
 button{
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.15);
+margin-top:20px;
 padding:12px 20px;
-border-radius:14px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.2);
+background:rgba(255,255,255,.05);
 color:white;
 cursor:pointer;
 transition:.3s;
@@ -72,94 +71,22 @@ backdrop-filter:blur(10px);
 }
 
 button:hover{
-transform:translateY(-3px);
-background:rgba(255,255,255,.12);
+transform:scale(1.05);
+background:rgba(255,255,255,.1);
 }
 
-/* =========================
-   TARJETAS
-========================= */
-
-.card{
-width:90%;
-max-width:900px;
-margin:20px auto;
-padding:25px;
-border-radius:18px;
-background:rgba(255,255,255,.04);
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(12px);
-transition:.3s;
-}
-
-.card:hover{
-transform:scale(1.01);
-}
-
-/* =========================
-   GRID UNIVERSO
-========================= */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px;
-margin-top:15px;
-}
-
-.item{
-padding:20px;
-border-radius:14px;
-background:rgba(255,255,255,.03);
-cursor:pointer;
-transition:.3s;
-}
-
-.item:hover{
-background:rgba(255,255,255,.08);
-transform:translateY(-3px);
-}
-
-/* =========================
-   MENSAJES
-========================= */
-
-.messageBox{
-font-size:1.2rem;
-opacity:.9;
-min-height:40px;
-transition:.3s;
-}
-
-/* =========================
-   MODAL SECRETO
-========================= */
-
-#secret{
+/* PANEL */
+.panel{
 position:fixed;
-inset:0;
-display:none;
-justify-content:center;
-align-items:center;
-background:rgba(0,0,0,.8);
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(255,255,255,.05);
+padding:15px 25px;
+border-radius:15px;
 backdrop-filter:blur(10px);
-}
-
-#secret .box{
-padding:30px;
-border-radius:20px;
-background:rgba(255,255,255,.08);
-text-align:center;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-text-align:center;
-padding:60px;
-opacity:.6;
+border:1px solid rgba(255,255,255,.1);
+display:none;
 }
 
 </style>
@@ -168,215 +95,174 @@ opacity:.6;
 
 <body>
 
-<header>
-<h1>🌙 Cosmic Gift Universe</h1>
-<p>Un pequeño universo suave creado para explorar, jugar y descubrir secretos ✨</p>
-</header>
+<canvas id="space"></canvas>
 
-<!-- ========================= -->
-<!-- MENSAJES DINÁMICOS -->
-<!-- ========================= -->
+<div class="ui" id="ui">
 
-<div class="card">
-<h2>💌 Mensajes del universo</h2>
-<div id="msg" class="messageBox">Haz clic para descubrir algo...</div>
-<br>
-<button onclick="newMsg()">✨ Descubrir</button>
-</div>
+<h1>🌌 Universo para ti</h1>
 
-<!-- ========================= -->
-<!-- PREGUNTAS -->
-<!-- ========================= -->
+<p id="text">
+Este universo reacciona a ti... ¿quieres explorarlo?
+</p>
 
-<div class="card">
-<h2>🌌 Preguntas curiosas</h2>
-<div id="q" class="messageBox">...</div>
-<br>
-<button onclick="newQ()">🌠 Generar</button>
-</div>
-
-<!-- ========================= -->
-<!-- MINI INTERACCIONES -->
-<!-- ========================= -->
-
-<div class="card">
-<h2>🪐 Universo interactivo</h2>
-
-<div class="grid">
-
-<div class="item" onclick="starClick()">⭐ Estrella</div>
-<div class="item" onclick="moonClick()">🌙 Luna</div>
-<div class="item" onclick="cloudClick()">☁️ Nube</div>
-<div class="item" onclick="spaceClick()">🪐 Planeta</div>
+<button onclick="start()">🚀 Iniciar experiencia</button>
 
 </div>
 
-<p id="reaction" style="margin-top:15px;opacity:.8;"></p>
-
-</div>
-
-<!-- ========================= -->
-<!-- DIARIO -->
-<!-- ========================= -->
-
-<div class="card">
-<h2>📖 Diario estelar</h2>
-
-<textarea id="diary"
-style="width:100%;height:120px;
-border-radius:12px;
-border:none;
-padding:10px;
-background:rgba(255,255,255,.05);
-color:white;
-outline:none;"></textarea>
-
-<br><br>
-<button onclick="save()">💾 Guardar</button>
-</div>
-
-<!-- ========================= -->
-<!-- LOGROS -->
-<!-- ========================= -->
-
-<div class="card">
-<h2>🏆 Logros ocultos</h2>
-<div id="ach">🔒 Sin descubrir</div>
-</div>
-
-<!-- ========================= -->
-<!-- SECRET -->
-<!-- ========================= -->
-
-<div id="secret">
-<div class="box">
-<h2>✨ Has encontrado un secreto</h2>
-<p>Este universo fue creado con intención ✨</p>
-<button onclick="closeSecret()">Cerrar</button>
-</div>
-</div>
-
-<footer>
-✨ Hecho con calma, no con prisa ✨
-</footer>
+<div class="panel" id="panel"></div>
 
 <script>
 
 /* =========================
-   DATOS SUAVES
+   CANVAS UNIVERSO REAL
 ========================= */
 
-const msgs=[
-"Todo pasa a su tiempo ✨",
-"Estás haciendo mejor de lo que crees 🌙",
-"Lo simple también es magia 💜",
-"Hoy es un buen día para existir 🌌"
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let particles = [];
+
+for(let i=0;i<120;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+dx:(Math.random()-0.5)*0.3,
+dy:(Math.random()-0.5)*0.3
+});
+}
+
+function animate(){
+ctx.fillStyle="rgba(0,0,0,0.4)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="white";
+
+particles.forEach(p=>{
+p.x += p.dx;
+p.y += p.dy;
+
+if(p.x<0||p.x>canvas.width) p.dx*=-1;
+if(p.y<0||p.y>canvas.height) p.dy*=-1;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
+/* =========================
+   EXPERIENCIA EMOCIONAL
+========================= */
+
+let stage = 0;
+
+const texts = [
+"Este universo siente tu presencia 🌌",
+"Cada estrella reacciona a tu energía ✨",
+"No estás solo en este espacio...",
+"Algo está cambiando lentamente...",
+"El universo quiere decirte algo..."
 ];
 
-const qs=[
-"¿Qué te hace sentir paz?",
-"¿Qué recuerdo te hace sonreír?",
-"¿Qué te gustaría mejorar en ti?",
-"¿Qué sueño guardas en secreto?"
-];
-
-let clicks=0;
-
-/* =========================
-   FUNCIONES
-========================= */
-
-function newMsg(){
-document.getElementById("msg").innerText =
-msgs[Math.floor(Math.random()*msgs.length)];
+function start(){
+document.getElementById("ui").innerHTML=`
+<h1>🌙 Conectando...</h1>
+<p>Respira... esto es solo para ti</p>
+<button onclick="next()">Continuar</button>
+`;
 }
 
-function newQ(){
-document.getElementById("q").innerText =
-qs[Math.floor(Math.random()*qs.length)];
-}
+function next(){
 
-/* =========================
-   INTERACCIONES
-========================= */
+let ui = document.getElementById("ui");
 
-function starClick(){
-document.getElementById("reaction").innerText =
-"⭐ La estrella brilló contigo";
-unlock();
-}
+ui.innerHTML=`
+<h1>✨ ${texts[stage]}</h1>
+<p>Interactúa con el universo</p>
 
-function moonClick(){
-document.getElementById("reaction").innerText =
-"🌙 La luna te escucha";
-unlock();
-}
+<button onclick="clickUniverse()">Tocar universo</button>
+<button onclick="reveal()">Abrir mensaje oculto</button>
+`;
 
-function cloudClick(){
-document.getElementById("reaction").innerText =
-"☁️ La nube flota contigo";
-unlock();
-}
-
-function spaceClick(){
-document.getElementById("reaction").innerText =
-"🪐 El universo te reconoce";
-unlock();
+stage++;
 }
 
 /* =========================
-   PROGRESO OCULTO
+   INTERACCIÓN PRINCIPAL
 ========================= */
 
-function unlock(){
+let clicks = 0;
+
+function clickUniverse(){
+
 clicks++;
 
-if(clicks===3){
-document.getElementById("ach").innerText="🔓 Explorador";
+let panel = document.getElementById("panel");
+panel.style.display="block";
+
+if(clicks < 3){
+panel.innerText = "🌌 El universo te observa...";
 }
 
-if(clicks===6){
-document.getElementById("ach").innerText="🔓 Navegante";
+if(clicks >= 3 && clicks < 6){
+panel.innerText = "✨ Algo está respondiendo a ti...";
 }
 
-if(clicks===10){
-document.getElementById("ach").innerText="🔓 Guardián del cosmos";
-document.getElementById("secret").style.display="flex";
+if(clicks >= 6){
+panel.innerText = "💫 El universo te reconoce";
+unlockFinal();
 }
-}
 
-/* =========================
-   DIARIO
-========================= */
-
-function save(){
-localStorage.setItem("diary",
-document.getElementById("diary").value);
-
-alert("Guardado ✨");
 }
 
 /* =========================
-   SECRET
+   FINAL SECRETO
 ========================= */
 
-function closeSecret(){
-document.getElementById("secret").style.display="none";
+function unlockFinal(){
+
+document.getElementById("ui").innerHTML=`
+<h1>🌌 Conexión establecida</h1>
+<p>El universo entendió tu presencia.</p>
+
+<button onclick="message()">💌 Ver mensaje final</button>
+`;
+
+}
+
+function message(){
+
+document.getElementById("ui").innerHTML=`
+<h1>💜 Mensaje final</h1>
+
+<p>
+No importa dónde estés,<br>
+siempre habrá un universo observándote con calma.<br><br>
+
+✨ Y este fue creado solo para ti.
+</p>
+
+<h2>🌌 Fin de la experiencia</h2>
+`;
+
 }
 
 /* =========================
-   ESTRELLAS FONDO SUAVE
+   RESIZE
 ========================= */
 
-for(let i=0;i<80;i++){
-let s=document.createElement("div");
-s.className="star";
-s.style.width=Math.random()*3+"px";
-s.style.height=s.style.width;
-s.style.left=Math.random()*100+"%";
-s.style.top=Math.random()*100+"%";
-document.body.appendChild(s);
-}
+window.addEventListener("resize",()=>{
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+});
 
 </script>
 
