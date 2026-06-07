@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>✨ Un Pequeño Universo ✨</title>
+<title>🌌 Cosmos Universe</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -14,227 +14,265 @@
 
 <body>
 
-<!-- CAPA DE ESTRELLAS -->
-<div id="stars"></div>
+<!-- FONDO -->
 
-<!-- LUNA -->
+<div id="stars"></div>
+<div id="shooting-stars"></div>
+<div id="particles"></div>
+
 <div class="moon"></div>
 
-<!-- PLANETAS -->
 <div class="planet planet1"></div>
 <div class="planet planet2"></div>
+<div class="planet planet3"></div>
 
-<!-- PARTICULAS -->
-<div id="particles"></div>
+<!-- PANTALLA INICIAL -->
+
+<div id="welcomeScreen">
+
+<h1>✨ Cosmos Universe ✨</h1>
+
+<p>
+Un pequeño universo para explorar
+</p>
+
+<button id="startButton">
+🚀 Comenzar viaje
+</button>
+
+</div>
+
+<!-- CONTENIDO -->
+
+<div id="mainContent">
 
 <header>
 
-<h1>✨ Un Pequeño Universo ✨</h1>
+<h1>🌌 Cosmos Universe</h1>
 
 <p>
-Hay lugares que se visitan...
-<br>
-Y otros que simplemente se descubren.
+Explora estrellas, descubre secretos y construye tu propio rincón del universo.
 </p>
-
-<button id="musicButton">
-🎵 Activar ambiente
-</button>
 
 </header>
 
-<main>
+<!-- PANEL DE ESTADÍSTICAS -->
 
-<section class="card">
+<section class="glass">
 
-<h2>💌 Mensaje del Día</h2>
+<h2>📊 Estadísticas</h2>
 
-<p id="mensaje">
-Presiona el botón para descubrir algo bonito.
+<div class="stats">
+
+<div class="statBox">
+⭐
+<span id="starCount">0</span>
+</div>
+
+<div class="statBox">
+🌷
+<span id="flowerCount">0</span>
+</div>
+
+<div class="statBox">
+🏆
+<span id="achievementCount">0</span>
+</div>
+
+</div>
+
+</section>
+
+<!-- MENSAJE -->
+
+<section class="glass">
+
+<h2>💌 Mensaje del universo</h2>
+
+<p id="message">
+Presiona descubrir.
 </p>
 
-<button onclick="mensajeAleatorio()">
-Descubrir
+<button onclick="newMessage()">
+✨ Descubrir
 </button>
 
 </section>
 
-<section class="card">
+<!-- PREGUNTAS -->
 
-<h2>🎲 Preguntas Curiosas</h2>
+<section class="glass">
 
-<p id="pregunta">
-¿Qué descubrirás hoy?
+<h2>🎲 Pregunta curiosa</h2>
+
+<p id="question">
+...
 </p>
 
-<button onclick="preguntaAleatoria()">
-Generar
+<button onclick="newQuestion()">
+🌠 Generar
 </button>
 
 </section>
 
-<section class="card">
+<!-- ORACULO -->
+
+<section class="glass">
 
 <h2>🔮 Oráculo</h2>
 
-<p id="oraculo">
-El universo guarda secretos...
+<p id="oracle">
+Consulta el destino...
 </p>
 
-<button onclick="consultarOraculo()">
-Consultar
+<button onclick="oracle()">
+🔮 Consultar
 </button>
 
 </section>
 
-<section class="card">
+<!-- JARDIN -->
 
-<h2>🐱 Mascota Virtual</h2>
-
-<div class="pet">
-
-<div class="pet-face">
-😺
-</div>
-
-<p id="petMessage">
-La mascota está observando...
-</p>
-
-<button onclick="acariciarMascota()">
-Acariciar
-</button>
-
-</div>
-
-</section>
-
-<section class="card">
+<section class="glass">
 
 <h2>🌷 Jardín Cósmico</h2>
 
-<div id="jardin"></div>
+<div id="garden"></div>
 
-<button onclick="plantarFlor()">
-Plantar Flor
+<button onclick="plantFlower()">
+🌷 Plantar flor
 </button>
 
 </section>
 
-<section class="card">
+<!-- MASCOTA -->
 
-<h2>⭐ Exploración</h2>
+<section class="glass">
 
-<p>
-Estrellas encontradas:
-<span id="contadorEstrellas">0</span>
-</p>
+<h2>🐱 Mascota Estelar</h2>
 
-<button onclick="buscarEstrella()">
-Buscar Estrella
-</button>
+<div id="pet">
 
-</section>
-
-<section class="card">
-
-<h2>🏆 Logros</h2>
-
-<div id="logros">
-
-<p>🔒 Explorador Cósmico</p>
-<p>🔒 Jardinero Estelar</p>
-<p>🔒 Maestro de las Cartas</p>
-<p>🔒 Guardián de la Luna</p>
-<p>🔒 Navegante Galáctico</p>
+😺
 
 </div>
 
-</section>
-
-<section class="card">
-
-<h2>💌 Cartas Secretas</h2>
-
-<p id="carta">
-Todavía no has abierto ninguna carta.
+<p id="petText">
+Tu mascota te observa.
 </p>
 
-<button onclick="abrirCarta()">
-Abrir Carta
+<button onclick="petAction()">
+🐾 Acariciar
 </button>
 
 </section>
 
-<section class="card">
+<!-- COFRES -->
 
-<h2>📖 Libro de Recuerdos</h2>
+<section class="glass">
+
+<h2>🎁 Cofre Misterioso</h2>
+
+<p id="chestText">
+¿Qué habrá dentro?
+</p>
+
+<button onclick="openChest()">
+🎁 Abrir
+</button>
+
+</section>
+
+<!-- RULETA -->
+
+<section class="glass">
+
+<h2>🎡 Ruleta del universo</h2>
+
+<p id="rouletteResult">
+Gira para descubrir.
+</p>
+
+<button onclick="spinRoulette()">
+🎡 Girar
+</button>
+
+</section>
+
+<!-- DIARIO -->
+
+<section class="glass">
+
+<h2>📖 Diario Estelar</h2>
 
 <textarea
-id="diario"
-placeholder="Escribe algo bonito para recordar..."
+id="diary"
+placeholder="Escribe algo bonito..."
 ></textarea>
 
 <br>
 
-<button onclick="guardarRecuerdo()">
-Guardar
+<button onclick="saveDiary()">
+💾 Guardar
 </button>
 
 </section>
 
-<section class="card">
+<!-- LOGROS -->
 
-<h2>🎡 Ruleta del Universo</h2>
+<section class="glass">
 
-<p id="ruletaResultado">
-Gira la ruleta.
-</p>
+<h2>🏆 Logros</h2>
 
-<button onclick="girarRuleta()">
-Girar
-</button>
+<div id="achievements">
 
-</section>
+<p>🔒 Explorador</p>
+<p>🔒 Jardinero</p>
+<p>🔒 Coleccionista</p>
 
-<section class="card">
-
-<h2>🎁 Cofre Misterioso</h2>
-
-<p id="cofre">
-¿Qué habrá dentro?
-</p>
-
-<button onclick="abrirCofre()">
-Abrir Cofre
-</button>
+</div>
 
 </section>
 
-<section class="card">
+<!-- MAPA -->
 
-<h2>🌠 Observatorio</h2>
+<section class="glass">
 
-<p id="observatorio">
-Analizando el cielo...
-</p>
+<h2>🪐 Mapa Galáctico</h2>
+
+<div class="map">
+
+<div class="planetCard">
+🌙 Luna Aurora
+</div>
+
+<div class="planetCard">
+🪐 Planeta Nebula
+</div>
+
+<div class="planetCard">
+⭐ Estrella Zenith
+</div>
+
+<div class="planetCard">
+☄️ Sistema Nova
+</div>
+
+</div>
 
 </section>
 
-<section id="salaSecreta" class="card secret">
+<!-- SALA SECRETA -->
+
+<section
+id="secretRoom"
+class="glass secret">
 
 <h2>🔓 Sala Secreta</h2>
 
 <p>
 
-Si llegaste hasta aquí...
-
-Significa que exploraste cada rincón.
-
-Y quizá descubriste algo.
-
-Los detalles pequeños suelen esconder
-las cosas más especiales.
+Has encontrado una parte oculta del universo.
 
 ✨
 
@@ -242,15 +280,13 @@ las cosas más especiales.
 
 </section>
 
-</main>
-
 <footer>
 
-<p>
-✨ Gracias por explorar este pequeño universo ✨
-</p>
+✨ Fin de la transmisión cósmica ✨
 
 </footer>
+
+</div>
 
 <script src="script.js"></script>
 
