@@ -1,7 +1,15 @@
+/* =========================
+   RESET
+========================= */
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -9,33 +17,36 @@ body{
 font-family:'Segoe UI',sans-serif;
 
 background:
-linear-gradient(
-180deg,
-#070b1a,
-#111827,
-#1e1b4b
-);
+radial-gradient(circle at top,#2d1b69,#0f172a 50%,#020617);
 
 color:white;
 
 overflow-x:hidden;
 
 min-height:100vh;
+
+position:relative;
+
 }
+
+/* =========================
+   ESTRELLAS
+========================= */
 
 #stars{
 
 position:fixed;
 
-width:100%;
-height:100%;
-
 top:0;
 left:0;
 
-z-index:-1;
+width:100%;
+height:100%;
+
+z-index:-5;
 
 overflow:hidden;
+
 }
 
 .star{
@@ -44,23 +55,161 @@ position:absolute;
 
 color:white;
 
-animation:twinkle 3s infinite;
+animation:twinkle 4s infinite;
+
+pointer-events:none;
 
 }
 
 @keyframes twinkle{
 
-0%{opacity:.2;}
+0%{
+opacity:.2;
+transform:scale(.8);
+}
 
-50%{opacity:1;}
+50%{
+opacity:1;
+transform:scale(1.2);
+}
 
-100%{opacity:.2;}
+100%{
+opacity:.2;
+transform:scale(.8);
+}
 
 }
 
+/* =========================
+   LUNA
+========================= */
+
+.moon{
+
+position:fixed;
+
+top:60px;
+
+right:80px;
+
+width:180px;
+
+height:180px;
+
+border-radius:50%;
+
+background:white;
+
+box-shadow:
+0 0 30px white,
+0 0 60px white,
+0 0 100px white;
+
+z-index:-2;
+
+animation:floatMoon 8s ease-in-out infinite;
+
+}
+
+@keyframes floatMoon{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-20px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* =========================
+   PLANETAS
+========================= */
+
+.planet{
+
+position:fixed;
+
+border-radius:50%;
+
+z-index:-3;
+
+}
+
+.planet1{
+
+width:120px;
+height:120px;
+
+background:
+linear-gradient(
+45deg,
+#ff6ec7,
+#ff9671
+);
+
+top:250px;
+left:50px;
+
+animation:orbit1 20s linear infinite;
+
+}
+
+.planet2{
+
+width:80px;
+height:80px;
+
+background:
+linear-gradient(
+45deg,
+#00c9ff,
+#92fe9d
+);
+
+bottom:120px;
+right:100px;
+
+animation:orbit2 15s linear infinite;
+
+}
+
+@keyframes orbit1{
+
+0%{
+transform:rotate(0deg);
+}
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+@keyframes orbit2{
+
+0%{
+transform:rotate(360deg);
+}
+
+100%{
+transform:rotate(0deg);
+}
+
+}
+
+/* =========================
+   HEADER
+========================= */
+
 header{
 
-padding:80px 20px;
+padding:100px 20px;
 
 text-align:center;
 
@@ -72,68 +221,73 @@ font-size:4rem;
 
 margin-bottom:20px;
 
+text-shadow:
+0 0 10px white,
+0 0 20px white;
+
 }
 
 header p{
 
-font-size:1.2rem;
+font-size:1.3rem;
 
-opacity:.8;
+opacity:.9;
+
+line-height:1.8;
+
+max-width:700px;
+
+margin:auto;
 
 }
 
+/* =========================
+   TARJETAS
+========================= */
+
 .card{
-
-background:
-rgba(255,255,255,.08);
-
-backdrop-filter:blur(12px);
 
 width:90%;
 
 max-width:900px;
 
-margin:25px auto;
+margin:30px auto;
 
 padding:30px;
 
+background:
+rgba(255,255,255,.08);
+
+backdrop-filter:blur(15px);
+
 border-radius:25px;
 
-box-shadow:
-0 0 30px rgba(255,255,255,.08);
+border:
+1px solid rgba(255,255,255,.15);
 
-transition:.3s;
+box-shadow:
+0 0 25px rgba(255,255,255,.08);
+
+transition:.4s;
+
 }
 
 .card:hover{
 
-transform:translateY(-5px);
+transform:
+translateY(-8px)
+scale(1.01);
+
+box-shadow:
+0 0 40px rgba(255,255,255,.15);
 
 }
 
-button{
+.card h2{
 
-padding:14px 24px;
+margin-bottom:15px;
 
-border:none;
-
-border-radius:15px;
-
-background:#ec4899;
-
-color:white;
-
-font-size:16px;
-
-cursor:pointer;
-
-margin-top:15px;
-
-}
-
-button:hover{
-
-transform:scale(1.05);
+font-size:2rem;
 
 }
 
@@ -141,31 +295,234 @@ transform:scale(1.05);
 
 margin-top:15px;
 
-font-size:18px;
+font-size:1.1rem;
+
+line-height:1.8;
 
 }
 
-#jardin{
+/* =========================
+   BOTONES
+========================= */
 
-font-size:30px;
+button{
 
-min-height:80px;
+padding:14px 25px;
+
+border:none;
+
+border-radius:15px;
+
+cursor:pointer;
+
+font-size:16px;
 
 margin-top:15px;
 
+background:
+linear-gradient(
+45deg,
+#ec4899,
+#8b5cf6
+);
+
+color:white;
+
+transition:.3s;
+
 }
+
+button:hover{
+
+transform:
+scale(1.08);
+
+box-shadow:
+0 0 20px #ec4899;
+
+}
+
+/* =========================
+   JARDIN
+========================= */
+
+#jardin{
+
+min-height:80px;
+
+font-size:35px;
+
+margin-top:20px;
+
+line-height:2;
+
+}
+
+/* =========================
+   TEXTAREA
+========================= */
+
+textarea{
+
+width:100%;
+
+height:180px;
+
+padding:15px;
+
+border:none;
+
+border-radius:15px;
+
+resize:none;
+
+background:
+rgba(255,255,255,.1);
+
+color:white;
+
+margin-top:15px;
+
+font-size:15px;
+
+outline:none;
+
+}
+
+/* =========================
+   MASCOTA
+========================= */
+
+.pet{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.pet-face{
+
+font-size:5rem;
+
+animation:bounce 2s infinite;
+
+}
+
+@keyframes bounce{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
 
-padding:50px;
+padding:60px;
 
 text-align:center;
 
-opacity:.7;
+opacity:.8;
 
 }
+
+/* =========================
+   SALA SECRETA
+========================= */
 
 .secret{
 
 display:none;
+
+background:
+linear-gradient(
+135deg,
+rgba(236,72,153,.2),
+rgba(139,92,246,.2)
+);
+
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#111827;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#8b5cf6;
+
+border-radius:20px;
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+header h1{
+
+font-size:2.5rem;
+
+}
+
+.moon{
+
+width:120px;
+height:120px;
+
+right:20px;
+
+}
+
+.planet1{
+
+width:80px;
+height:80px;
+
+}
+
+.planet2{
+
+width:60px;
+height:60px;
+
+}
+
+.card{
+
+padding:20px;
+
+}
+
 }
