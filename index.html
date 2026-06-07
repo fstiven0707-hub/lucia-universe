@@ -2,294 +2,383 @@
 <html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🌌 Cosmos Universe</title>
+<title>🌙 Cosmic Gift Universe</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+
+/* =========================
+   BASE SUAVE COSMOS
+========================= */
+
+body{
+margin:0;
+font-family: 'Segoe UI', sans-serif;
+background: radial-gradient(circle at top,#0b1020,#070a14,#0a0f1f);
+color:#eaf0ff;
+overflow-x:hidden;
+}
+
+/* estrellas suaves */
+.star{
+position:fixed;
+background:white;
+border-radius:50%;
+opacity:.4;
+animation:floatStar 6s infinite ease-in-out;
+}
+
+@keyframes floatStar{
+0%,100%{transform:translateY(0); opacity:.2;}
+50%{transform:translateY(-10px); opacity:.7;}
+}
+
+/* =========================
+   HEADER SUAVE
+========================= */
+
+header{
+text-align:center;
+padding:80px 20px 40px;
+}
+
+header h1{
+font-size:3rem;
+font-weight:600;
+color:#dbe7ff;
+}
+
+header p{
+opacity:.7;
+max-width:600px;
+margin:auto;
+}
+
+/* =========================
+   BOTONES SUAVES
+========================= */
+
+button{
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+padding:12px 20px;
+border-radius:14px;
+color:white;
+cursor:pointer;
+transition:.3s;
+backdrop-filter:blur(10px);
+}
+
+button:hover{
+transform:translateY(-3px);
+background:rgba(255,255,255,.12);
+}
+
+/* =========================
+   TARJETAS
+========================= */
+
+.card{
+width:90%;
+max-width:900px;
+margin:20px auto;
+padding:25px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+transition:.3s;
+}
+
+.card:hover{
+transform:scale(1.01);
+}
+
+/* =========================
+   GRID UNIVERSO
+========================= */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-top:15px;
+}
+
+.item{
+padding:20px;
+border-radius:14px;
+background:rgba(255,255,255,.03);
+cursor:pointer;
+transition:.3s;
+}
+
+.item:hover{
+background:rgba(255,255,255,.08);
+transform:translateY(-3px);
+}
+
+/* =========================
+   MENSAJES
+========================= */
+
+.messageBox{
+font-size:1.2rem;
+opacity:.9;
+min-height:40px;
+transition:.3s;
+}
+
+/* =========================
+   MODAL SECRETO
+========================= */
+
+#secret{
+position:fixed;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,.8);
+backdrop-filter:blur(10px);
+}
+
+#secret .box{
+padding:30px;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+text-align:center;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+text-align:center;
+padding:60px;
+opacity:.6;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<!-- FONDO -->
-
-<div id="stars"></div>
-<div id="shooting-stars"></div>
-<div id="particles"></div>
-
-<div class="moon"></div>
-
-<div class="planet planet1"></div>
-<div class="planet planet2"></div>
-<div class="planet planet3"></div>
-
-<!-- PANTALLA INICIAL -->
-
-<div id="welcomeScreen">
-
-<h1>✨ Cosmos Universe ✨</h1>
-
-<p>
-Un pequeño universo para explorar
-</p>
-
-<button id="startButton">
-🚀 Comenzar viaje
-</button>
-
-</div>
-
-<!-- CONTENIDO -->
-
-<div id="mainContent">
-
 <header>
-
-<h1>🌌 Cosmos Universe</h1>
-
-<p>
-Explora estrellas, descubre secretos y construye tu propio rincón del universo.
-</p>
-
+<h1>🌙 Cosmic Gift Universe</h1>
+<p>Un pequeño universo suave creado para explorar, jugar y descubrir secretos ✨</p>
 </header>
 
-<!-- PANEL DE ESTADÍSTICAS -->
+<!-- ========================= -->
+<!-- MENSAJES DINÁMICOS -->
+<!-- ========================= -->
 
-<section class="glass">
-
-<h2>📊 Estadísticas</h2>
-
-<div class="stats">
-
-<div class="statBox">
-⭐
-<span id="starCount">0</span>
-</div>
-
-<div class="statBox">
-🌷
-<span id="flowerCount">0</span>
-</div>
-
-<div class="statBox">
-🏆
-<span id="achievementCount">0</span>
-</div>
-
-</div>
-
-</section>
-
-<!-- MENSAJE -->
-
-<section class="glass">
-
-<h2>💌 Mensaje del universo</h2>
-
-<p id="message">
-Presiona descubrir.
-</p>
-
-<button onclick="newMessage()">
-✨ Descubrir
-</button>
-
-</section>
-
-<!-- PREGUNTAS -->
-
-<section class="glass">
-
-<h2>🎲 Pregunta curiosa</h2>
-
-<p id="question">
-...
-</p>
-
-<button onclick="newQuestion()">
-🌠 Generar
-</button>
-
-</section>
-
-<!-- ORACULO -->
-
-<section class="glass">
-
-<h2>🔮 Oráculo</h2>
-
-<p id="oracle">
-Consulta el destino...
-</p>
-
-<button onclick="oracle()">
-🔮 Consultar
-</button>
-
-</section>
-
-<!-- JARDIN -->
-
-<section class="glass">
-
-<h2>🌷 Jardín Cósmico</h2>
-
-<div id="garden"></div>
-
-<button onclick="plantFlower()">
-🌷 Plantar flor
-</button>
-
-</section>
-
-<!-- MASCOTA -->
-
-<section class="glass">
-
-<h2>🐱 Mascota Estelar</h2>
-
-<div id="pet">
-
-😺
-
-</div>
-
-<p id="petText">
-Tu mascota te observa.
-</p>
-
-<button onclick="petAction()">
-🐾 Acariciar
-</button>
-
-</section>
-
-<!-- COFRES -->
-
-<section class="glass">
-
-<h2>🎁 Cofre Misterioso</h2>
-
-<p id="chestText">
-¿Qué habrá dentro?
-</p>
-
-<button onclick="openChest()">
-🎁 Abrir
-</button>
-
-</section>
-
-<!-- RULETA -->
-
-<section class="glass">
-
-<h2>🎡 Ruleta del universo</h2>
-
-<p id="rouletteResult">
-Gira para descubrir.
-</p>
-
-<button onclick="spinRoulette()">
-🎡 Girar
-</button>
-
-</section>
-
-<!-- DIARIO -->
-
-<section class="glass">
-
-<h2>📖 Diario Estelar</h2>
-
-<textarea
-id="diary"
-placeholder="Escribe algo bonito..."
-></textarea>
-
+<div class="card">
+<h2>💌 Mensajes del universo</h2>
+<div id="msg" class="messageBox">Haz clic para descubrir algo...</div>
 <br>
+<button onclick="newMsg()">✨ Descubrir</button>
+</div>
 
-<button onclick="saveDiary()">
-💾 Guardar
-</button>
+<!-- ========================= -->
+<!-- PREGUNTAS -->
+<!-- ========================= -->
 
-</section>
+<div class="card">
+<h2>🌌 Preguntas curiosas</h2>
+<div id="q" class="messageBox">...</div>
+<br>
+<button onclick="newQ()">🌠 Generar</button>
+</div>
 
+<!-- ========================= -->
+<!-- MINI INTERACCIONES -->
+<!-- ========================= -->
+
+<div class="card">
+<h2>🪐 Universo interactivo</h2>
+
+<div class="grid">
+
+<div class="item" onclick="starClick()">⭐ Estrella</div>
+<div class="item" onclick="moonClick()">🌙 Luna</div>
+<div class="item" onclick="cloudClick()">☁️ Nube</div>
+<div class="item" onclick="spaceClick()">🪐 Planeta</div>
+
+</div>
+
+<p id="reaction" style="margin-top:15px;opacity:.8;"></p>
+
+</div>
+
+<!-- ========================= -->
+<!-- DIARIO -->
+<!-- ========================= -->
+
+<div class="card">
+<h2>📖 Diario estelar</h2>
+
+<textarea id="diary"
+style="width:100%;height:120px;
+border-radius:12px;
+border:none;
+padding:10px;
+background:rgba(255,255,255,.05);
+color:white;
+outline:none;"></textarea>
+
+<br><br>
+<button onclick="save()">💾 Guardar</button>
+</div>
+
+<!-- ========================= -->
 <!-- LOGROS -->
+<!-- ========================= -->
 
-<section class="glass">
-
-<h2>🏆 Logros</h2>
-
-<div id="achievements">
-
-<p>🔒 Explorador</p>
-<p>🔒 Jardinero</p>
-<p>🔒 Coleccionista</p>
-
+<div class="card">
+<h2>🏆 Logros ocultos</h2>
+<div id="ach">🔒 Sin descubrir</div>
 </div>
 
-</section>
+<!-- ========================= -->
+<!-- SECRET -->
+<!-- ========================= -->
 
-<!-- MAPA -->
-
-<section class="glass">
-
-<h2>🪐 Mapa Galáctico</h2>
-
-<div class="map">
-
-<div class="planetCard">
-🌙 Luna Aurora
+<div id="secret">
+<div class="box">
+<h2>✨ Has encontrado un secreto</h2>
+<p>Este universo fue creado con intención ✨</p>
+<button onclick="closeSecret()">Cerrar</button>
 </div>
-
-<div class="planetCard">
-🪐 Planeta Nebula
 </div>
-
-<div class="planetCard">
-⭐ Estrella Zenith
-</div>
-
-<div class="planetCard">
-☄️ Sistema Nova
-</div>
-
-</div>
-
-</section>
-
-<!-- SALA SECRETA -->
-
-<section
-id="secretRoom"
-class="glass secret">
-
-<h2>🔓 Sala Secreta</h2>
-
-<p>
-
-Has encontrado una parte oculta del universo.
-
-✨
-
-</p>
-
-</section>
 
 <footer>
-
-✨ Fin de la transmisión cósmica ✨
-
+✨ Hecho con calma, no con prisa ✨
 </footer>
 
-</div>
+<script>
 
-<script src="script.js"></script>
+/* =========================
+   DATOS SUAVES
+========================= */
+
+const msgs=[
+"Todo pasa a su tiempo ✨",
+"Estás haciendo mejor de lo que crees 🌙",
+"Lo simple también es magia 💜",
+"Hoy es un buen día para existir 🌌"
+];
+
+const qs=[
+"¿Qué te hace sentir paz?",
+"¿Qué recuerdo te hace sonreír?",
+"¿Qué te gustaría mejorar en ti?",
+"¿Qué sueño guardas en secreto?"
+];
+
+let clicks=0;
+
+/* =========================
+   FUNCIONES
+========================= */
+
+function newMsg(){
+document.getElementById("msg").innerText =
+msgs[Math.floor(Math.random()*msgs.length)];
+}
+
+function newQ(){
+document.getElementById("q").innerText =
+qs[Math.floor(Math.random()*qs.length)];
+}
+
+/* =========================
+   INTERACCIONES
+========================= */
+
+function starClick(){
+document.getElementById("reaction").innerText =
+"⭐ La estrella brilló contigo";
+unlock();
+}
+
+function moonClick(){
+document.getElementById("reaction").innerText =
+"🌙 La luna te escucha";
+unlock();
+}
+
+function cloudClick(){
+document.getElementById("reaction").innerText =
+"☁️ La nube flota contigo";
+unlock();
+}
+
+function spaceClick(){
+document.getElementById("reaction").innerText =
+"🪐 El universo te reconoce";
+unlock();
+}
+
+/* =========================
+   PROGRESO OCULTO
+========================= */
+
+function unlock(){
+clicks++;
+
+if(clicks===3){
+document.getElementById("ach").innerText="🔓 Explorador";
+}
+
+if(clicks===6){
+document.getElementById("ach").innerText="🔓 Navegante";
+}
+
+if(clicks===10){
+document.getElementById("ach").innerText="🔓 Guardián del cosmos";
+document.getElementById("secret").style.display="flex";
+}
+}
+
+/* =========================
+   DIARIO
+========================= */
+
+function save(){
+localStorage.setItem("diary",
+document.getElementById("diary").value);
+
+alert("Guardado ✨");
+}
+
+/* =========================
+   SECRET
+========================= */
+
+function closeSecret(){
+document.getElementById("secret").style.display="none";
+}
+
+/* =========================
+   ESTRELLAS FONDO SUAVE
+========================= */
+
+for(let i=0;i<80;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.width=Math.random()*3+"px";
+s.style.height=s.style.width;
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+document.body.appendChild(s);
+}
+
+</script>
 
 </body>
-
 </html>
